@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "793189797531",
+    "project_id": "mob23quizapp",
+    "storage_bucket": "mob23quizapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:793189797531:android:16acf9d94eb921da1d403e",
+        "android_client_info": {
+          "package_name": "com.daryl.mob23quizapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCkg09beWvAIboD8n4dgkVDQJ9Ss7jwNTw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
