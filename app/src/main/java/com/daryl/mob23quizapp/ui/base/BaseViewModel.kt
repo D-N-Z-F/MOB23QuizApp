@@ -7,8 +7,8 @@ import kotlinx.coroutines.flow.SharedFlow
 abstract class BaseViewModel: ViewModel() {
     protected val _finish = MutableSharedFlow<String>()
     val finish: SharedFlow<String> = _finish
-    protected val _login: MutableSharedFlow<String> = MutableSharedFlow()
-    val login: SharedFlow<String> = _login
+    protected val _signIn: MutableSharedFlow<String> = MutableSharedFlow()
+    val signIn: SharedFlow<String> = _signIn
     protected val _submit: MutableSharedFlow<String> = MutableSharedFlow()
     val submit: SharedFlow<String> = _submit
     protected val _error = MutableSharedFlow<String>()

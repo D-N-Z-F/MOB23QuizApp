@@ -1,17 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
-    <FrameLayout
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="@dimen/m"
         tools:context=".ui.loginRegister.LoginRegisterFragment">
 
-        <!-- TODO: Update blank fragment layout -->
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/hello_blank_fragment" />
+            android:id="@+id/tvHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/xxl"
+            android:text="@string/sign_in_header"
+            android:textStyle="italic|bold"
+            android:textSize="@dimen/giant_text_size"/>
 
-    </FrameLayout>
+        <ImageView
+            android:id="@+id/ivIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/m"
+            android:src="@drawable/ic_account"
+            android:scaleType="fitCenter"
+            android:contentDescription="@string/icon_desc"/>
+
+        <EditText
+            android:id="@+id/etUsername"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/m"
+            android:hint="@string/username_insert"
+            android:autofillHints="First Name"
+            android:inputType="text"
+            android:background="@drawable/rounded_edit_text_bg"
+            android:visibility="gone"/>
+
+        <EditText
+            android:id="@+id/etEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/m"
+            android:hint="@string/email_insert"
+            android:autofillHints="Title"
+            android:inputType="textEmailAddress"
+            android:background="@drawable/rounded_edit_text_bg"/>
+
+        <EditText
+            android:id="@+id/etPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/m"
+            android:hint="@string/password_insert"
+            android:autofillHints="Desc"
+            android:inputType="textPassword"
+            android:background="@drawable/rounded_edit_text_bg"/>
+
+        <EditText
+            android:id="@+id/etPassword2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/m"
+            android:hint="@string/password2_insert"
+            android:autofillHints="Desc"
+            android:inputType="textPassword"
+            android:background="@drawable/rounded_edit_text_bg"
+            android:visibility="gone"/>
+
+        <RelativeLayout
+            android:id="@+id/spinnerParent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/m"
+            android:visibility="gone">
+
+            <Spinner
+                android:id="@+id/spinnerRoles"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/xs"
+                android:entries="@array/roles"
+                android:background="@drawable/rounded_spinner_bg"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_dropdown"
+                android:layout_alignEnd="@id/spinnerRoles"
+                android:layout_marginEnd="@dimen/xs"
+                android:layout_centerVertical="true"
+                android:contentDescription="@string/icon_desc" />
+
+        </RelativeLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/mbLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/m"
+            android:text="@string/login"
+            app:cornerRadius="@dimen/xxxs"
+            android:elevation="@dimen/xs"
+            android:backgroundTint="@color/blue"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/mbRegister"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/m"
+            android:text="@string/register"
+            android:textColor="@color/black"
+            app:cornerRadius="@dimen/xxxs"
+            android:elevation="@dimen/xs"
+            app:backgroundTint="@color/white"/>
+
+    </LinearLayout>
 </layout>

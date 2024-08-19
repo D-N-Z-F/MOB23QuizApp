@@ -7,7 +7,13 @@
     <fragment
         android:id="@+id/loginRegisterFragment"
         android:name="com.daryl.mob23quizapp.ui.loginRegister.LoginRegisterFragment"
-        android:label="LoginRegisterFragment" />
+        android:label="LoginRegisterFragment" >
+        <action
+            android:id="@+id/actionLoginRegisterToHome"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/loginRegisterFragment"
+            app:popUpToInclusive="true"/>
+    </fragment>
 
     <fragment
         android:id="@+id/homeFragment"

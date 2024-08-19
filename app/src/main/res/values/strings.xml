@@ -4,4 +4,18 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="menu">Menu</string>
     <string name="home">Home</string>
+    <string name="placeholder">Placeholder</string>
+    <string name="icon_desc">Icon</string>
+    <string name="username_insert">Insert Username</string>
+    <string name="email_insert">Insert Email</string>
+    <string name="password_insert">Insert Password</string>
+    <string name="password2_insert">Confirm Password</string>
+    <string name="login">LOGIN</string>
+    <string name="register">REGISTER</string>
+    <string name="sign_in_header">Sign In</string>
+    <string name="success_message">%1$s successful.</string>
+    <string-array name="roles">
+        <item>Student</item>
+        <item>Teacher</item>
+    </string-array>
 </resources>

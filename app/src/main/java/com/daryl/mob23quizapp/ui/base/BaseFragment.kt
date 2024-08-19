@@ -9,11 +9,16 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.daryl.mob23quizapp.R
 import com.daryl.mob23quizapp.core.Constants.ERROR
 import com.daryl.mob23quizapp.core.Constants.INFO
+import com.daryl.mob23quizapp.core.Constants.LOGIN
 import com.daryl.mob23quizapp.core.Constants.SUCCESS
+import com.daryl.mob23quizapp.ui.loginRegister.LoginRegisterFragmentDirections
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.coroutines.launch
 
 abstract class BaseFragment<T: ViewDataBinding>: Fragment() {
     protected abstract val viewModel: BaseViewModel
@@ -35,7 +40,19 @@ abstract class BaseFragment<T: ViewDataBinding>: Fragment() {
     }
 
     protected open fun onBindData(view: View) {
-
+        viewModel.run {
+            lifecycleScope.launch {
+                signIn.collect {
+                    showSnackBar(view, it, SUCCESS)
+                    findNavController().navigate(
+                        LoginRegisterFragmentDirections.actionLoginRegisterToHome()
+                    )
+                }
+            }
+            lifecycleScope.launch {
+                error.collect { showSnackBar(view, it, ERROR) }
+            }
+        }
     }
 
     private fun showToast(message: String) {
