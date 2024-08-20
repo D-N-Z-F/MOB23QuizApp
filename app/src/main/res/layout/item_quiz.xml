@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/mcvQuiz"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/design_default_color_secondary"
+        android:layout_margin="@dimen/xxs"
+        app:cardCornerRadius="@dimen/xxs"
+        android:elevation="@dimen/xs">
+
+        <ImageView
+            android:id="@+id/ivCopy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/s"
+            android:layout_marginEnd="@dimen/s"
+            android:layout_gravity="top|end"
+            android:src="@drawable/ic_copy"
+            app:tint="@color/grey"
+            android:contentDescription="@string/icon_desc"/>
+
+        <ImageView
+            android:id="@+id/ivDelete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/s"
+            android:layout_marginEnd="@dimen/s"
+            android:layout_gravity="bottom|end"
+            android:src="@drawable/ic_delete"
+            app:tint="@color/red"
+            android:contentDescription="@string/icon_desc"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/s"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvID"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="QUIZ ID: 12345678"
+                android:textStyle="italic"
+                android:textSize="@dimen/tiny_text_size" />
+
+            <TextView
+                android:id="@+id/tvName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="QUIZ EXAMPLE NAME"
+                android:textStyle="bold"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/tvCategory"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/xxxs"
+                    android:text="Science"
+                    android:minWidth="@dimen/zero"
+                    android:minHeight="@dimen/zero"
+                    app:cornerRadius="@dimen/xxxxs"
+                    app:backgroundTint="@color/blue" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/tvNoOfQuestions"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/s"
+                    android:padding="@dimen/xxxxs"
+                    android:text="20"
+                    android:minWidth="@dimen/zero"
+                    android:minHeight="@dimen/zero"
+                    app:cornerRadius="@dimen/xxxxs"
+                    android:drawableEnd="@drawable/ic_questions"
+                    app:backgroundTint="@color/blue" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/tvTimeLimit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/xxxxs"
+                    android:text="10"
+                    android:minWidth="@dimen/zero"
+                    android:minHeight="@dimen/zero"
+                    app:cornerRadius="@dimen/xxxxs"
+                    android:drawableEnd="@drawable/ic_timer"
+                    app:backgroundTint="@color/blue" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+</layout>

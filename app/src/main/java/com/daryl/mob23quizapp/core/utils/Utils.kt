@@ -5,4 +5,5 @@ import android.util.Log
 object Utils {
     // Temporary for debugging
     fun debugLog(): (Any) -> Unit = { Log.d("debugging", it.toString()) }
+    fun String.capitalize() = this.substring(0, 1).uppercase() + this.substring(1).lowercase()
 }

@@ -7,6 +7,7 @@ import com.daryl.mob23quizapp.core.Constants.LOGIN
 import com.daryl.mob23quizapp.core.Constants.REGISTER
 import com.daryl.mob23quizapp.core.services.AuthService
 import com.daryl.mob23quizapp.core.utils.ResourceProvider
+import com.daryl.mob23quizapp.core.utils.Utils.capitalize
 import com.daryl.mob23quizapp.data.models.User
 import com.daryl.mob23quizapp.data.models.Validator
 import com.daryl.mob23quizapp.data.repositories.UserRepo
@@ -27,7 +28,9 @@ class LoginRegisterViewModel @Inject constructor(
             globalErrorHandler {
                 authService.login(email, password) ?: throw Exception("User doesn't exist.")
             }?.let {
-                _signIn.emit(resourceProvider.getString(R.string.success_message, LOGIN))
+                _signIn.emit(
+                    resourceProvider.getString(R.string.success_message, LOGIN.capitalize())
+                )
             }
         }
     }
@@ -40,7 +43,9 @@ class LoginRegisterViewModel @Inject constructor(
                 if(!isRegistered) throw Exception("Registration failed, please retry later.")
                 userRepo.createUser(user)
             }?.let {
-                _signIn.emit(resourceProvider.getString(R.string.success_message, REGISTER))
+                _signIn.emit(
+                    resourceProvider.getString(R.string.success_message, REGISTER.capitalize())
+                )
             }
         }
     }
