@@ -49,9 +49,6 @@ class LoginRegisterFragment : BaseFragment<FragmentLoginRegisterBinding>() {
             }
         }
     }
-    override fun onBindData(view: View) {
-        super.onBindData(view)
-    }
     private fun toggleState(clickedButton: MaterialButton) {
         state = if(state == LOGIN) REGISTER else LOGIN
         resetInputs()

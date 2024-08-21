@@ -16,6 +16,8 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.daryl.mob23quizapp.R
 import com.daryl.mob23quizapp.core.services.AuthService
+import com.daryl.mob23quizapp.core.utils.Utils.debugLog
+import com.daryl.mob23quizapp.data.models.Roles
 import com.daryl.mob23quizapp.data.models.Roles.TEACHER
 import com.daryl.mob23quizapp.data.repositories.UserRepo
 import com.google.android.material.navigation.NavigationView
@@ -42,6 +44,7 @@ class MainActivity : AppCompatActivity() {
         authService.getUid() ?: return
         lifecycleScope.launch {
             val user = userRepo.getUserById() ?: return@launch
+            setupNavViewMenu(user.role)
             val destination = when(user.role) {
                 TEACHER -> R.id.teacherDashboardFragment
                 else -> -1
@@ -61,16 +64,37 @@ class MainActivity : AppCompatActivity() {
     }
     private fun setupDrawerNavigation() {
         val drawerLayout = findViewById<DrawerLayout>(R.id.drawerLayout)
-        val navView = findViewById<NavigationView>(R.id.navView)
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         val navList = setOf(R.id.teacherDashboardFragment)
         appBarConfig = AppBarConfiguration(navList, drawerLayout)
 
-        setupNavViewConfig(drawerLayout, navView)
         setupToolbarConfig(toolbar)
         setupActionBarWithNavController(navController, appBarConfig)
     }
-    private fun setupNavViewConfig(drawerLayout: DrawerLayout, navView: NavigationView) {
+    private fun setupToolbarConfig(toolbar: Toolbar) {
+        toolbar.apply {
+            setSupportActionBar(this)
+            setupWithNavController(navController, appBarConfig)
+            navController.addOnDestinationChangedListener { _, dest, _ ->
+                visibility = if(dest.id == R.id.loginRegisterFragment) View.GONE else View.VISIBLE
+            }
+        }
+    }
+    fun setupNavViewMenu(role: Roles) {
+        val navView = findViewById<NavigationView>(R.id.navView)
+        navView.apply {
+            menu.clear()
+            inflateMenu(
+                when(role) {
+                    TEACHER -> R.menu.drawer_teacher_menu
+                    else -> R.menu.drawer_student_menu
+                }
+            )
+        }
+        setupNavViewConfig(navView)
+    }
+    private fun setupNavViewConfig(navView: NavigationView) {
+        val drawerLayout = findViewById<DrawerLayout>(R.id.drawerLayout)
         navView.apply {
             setupWithNavController(navController)
             menu.findItem(R.id.logout).setOnMenuItemClickListener {
@@ -82,16 +106,8 @@ class MainActivity : AppCompatActivity() {
                     NavOptions.Builder()
                         .setPopUpTo(navController.graph.startDestinationId, true).build()
                 )
+                menu.clear()
                 true
-            }
-        }
-    }
-    private fun setupToolbarConfig(toolbar: Toolbar) {
-        toolbar.apply {
-            setSupportActionBar(this)
-            setupWithNavController(navController, appBarConfig)
-            navController.addOnDestinationChangedListener { _, dest, _ ->
-                visibility = if(dest.id == R.id.loginRegisterFragment) View.GONE else View.VISIBLE
             }
         }
     }

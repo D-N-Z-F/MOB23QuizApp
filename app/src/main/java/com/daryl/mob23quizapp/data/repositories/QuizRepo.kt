@@ -37,6 +37,9 @@ class QuizRepo(
     suspend fun updateQuiz(quiz: Quiz) {
         getCollection().document(quiz.id!!).set(quiz.toMap()).await()
     }
+    suspend fun deleteQuiz(id: String) {
+        getCollection().document(id).delete().await()
+    }
     suspend fun getQuizById(id: String): Quiz? {
         val res = getCollection().document(id).get().await()
         return res.data?.let { Quiz.fromMap(it).copy(id = res.id) }

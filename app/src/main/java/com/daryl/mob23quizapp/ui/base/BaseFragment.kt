@@ -15,9 +15,13 @@ import com.daryl.mob23quizapp.R
 import com.daryl.mob23quizapp.core.Constants.ADD
 import com.daryl.mob23quizapp.core.Constants.ERROR
 import com.daryl.mob23quizapp.core.Constants.INFO
-import com.daryl.mob23quizapp.core.Constants.LOGIN
 import com.daryl.mob23quizapp.core.Constants.SUCCESS
+import com.daryl.mob23quizapp.core.utils.Utils.capitalize
+import com.daryl.mob23quizapp.core.utils.Utils.debugLog
+import com.daryl.mob23quizapp.data.models.Roles
+import com.daryl.mob23quizapp.ui.MainActivity
 import com.daryl.mob23quizapp.ui.loginRegister.LoginRegisterFragmentDirections
+import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
 
@@ -29,17 +33,14 @@ abstract class BaseFragment<T: ViewDataBinding>: Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View = inflater.inflate(getLayoutResource(), container, false)
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         onBindView(view)
         onBindData(view)
     }
-
     protected open fun onBindView(view: View) {
         binding = DataBindingUtil.bind(view)
     }
-
     protected open fun onBindData(view: View) {
         viewModel.run {
             lifecycleScope.launch {
@@ -56,18 +57,19 @@ abstract class BaseFragment<T: ViewDataBinding>: Fragment() {
             lifecycleScope.launch {
                 submit.collect {
                     showSnackBar(view, it, INFO)
-                    if(it.contains(ADD)) findNavController().popBackStack()
+                    if(it.contains(ADD.capitalize())) findNavController().popBackStack()
                 }
+            }
+            lifecycleScope.launch {
+                role.collect { (requireActivity() as? MainActivity)?.setupNavViewMenu(it) }
             }
         }
     }
-
     protected fun setVisibility(condition: Boolean): Int = if(condition) View.GONE else View.VISIBLE
 
     private fun showToast(message: String) {
         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
     }
-
     private fun showSnackBar(view: View, message: String, type: String) {
         val backgroundTint = when(type) {
             INFO -> R.color.blue

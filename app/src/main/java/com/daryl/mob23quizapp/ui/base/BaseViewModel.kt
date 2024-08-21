@@ -1,6 +1,7 @@
 package com.daryl.mob23quizapp.ui.base
 
 import androidx.lifecycle.ViewModel
+import com.daryl.mob23quizapp.data.models.Roles
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 
@@ -13,6 +14,8 @@ abstract class BaseViewModel: ViewModel() {
     val submit: SharedFlow<String> = _submit
     protected val _error = MutableSharedFlow<String>()
     val error: SharedFlow<String> = _error
+    protected val _role = MutableSharedFlow<Roles>()
+    val role: SharedFlow<Roles> = _role
 
     suspend fun <T> globalErrorHandler(func: suspend () -> T?): T? =
         try {
@@ -22,4 +25,5 @@ abstract class BaseViewModel: ViewModel() {
             e.printStackTrace()
             null
         }
+    suspend fun triggerMenuSetup(role: Roles) { _role.emit(role) }
 }

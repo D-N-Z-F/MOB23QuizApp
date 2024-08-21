@@ -1,7 +1,5 @@
 package com.daryl.mob23quizapp.data.models
 
-import com.daryl.mob23quizapp.core.utils.Utils.debugLog
-
 data class Quiz(
     val id: String? = null,
     val name: String,

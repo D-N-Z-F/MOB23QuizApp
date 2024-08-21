@@ -27,5 +27,9 @@
         android:id="@+id/addQuizFragment"
         android:name="com.daryl.mob23quizapp.ui.addQuiz.AddQuizFragment"
         android:label="Add Quiz" />
+    <fragment
+        android:id="@+id/manageStudentsFragment"
+        android:name="com.daryl.mob23quizapp.ui.manageStudents.ManageStudentsFragment"
+        android:label="Manage Students" />
 
 </navigation>

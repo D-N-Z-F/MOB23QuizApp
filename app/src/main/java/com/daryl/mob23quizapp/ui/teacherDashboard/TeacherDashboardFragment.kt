@@ -1,11 +1,15 @@
 package com.daryl.mob23quizapp.ui.teacherDashboard
 
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.daryl.mob23quizapp.R
+import com.daryl.mob23quizapp.core.Constants.COPY_ID
 import com.daryl.mob23quizapp.data.models.Question
 import com.daryl.mob23quizapp.data.models.Quiz
 import com.daryl.mob23quizapp.databinding.FragmentTeacherDashboardBinding
@@ -38,8 +42,17 @@ class TeacherDashboardFragment : BaseFragment<FragmentTeacherDashboardBinding>()
             }
         }
     }
+    private fun copyToClipboard(id: String) {
+        val clipboard =
+            requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        clipboard.setPrimaryClip(ClipData.newPlainText(COPY_ID, id))
+    }
     private fun setupAdapter() {
         adapter = QuizAdapter(emptyList())
+        adapter.listener = object : QuizAdapter.QuizListener {
+            override fun onClickCopy(id: String) { copyToClipboard(id) }
+            override fun onClickDelete(id: String) { viewModel.deleteQuiz(id) }
+        }
 
         binding?.rvQuizzes?.let {
             it.adapter = adapter
