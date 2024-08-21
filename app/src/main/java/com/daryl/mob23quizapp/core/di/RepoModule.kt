@@ -1,6 +1,7 @@
 package com.daryl.mob23quizapp.core.di
 
 import com.daryl.mob23quizapp.core.services.AuthService
+import com.daryl.mob23quizapp.data.repositories.QuizRepo
 import com.daryl.mob23quizapp.data.repositories.UserRepo
 import dagger.Module
 import dagger.Provides
@@ -14,4 +15,8 @@ class RepoModule {
     @Provides
     @Singleton
     fun provideUserRepo(authService: AuthService): UserRepo = UserRepo(authService)
+
+    @Provides
+    @Singleton
+    fun provideQuizRepo(authService: AuthService): QuizRepo = QuizRepo(authService)
 }

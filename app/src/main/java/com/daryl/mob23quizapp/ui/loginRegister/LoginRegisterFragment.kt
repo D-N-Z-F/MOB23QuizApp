@@ -4,10 +4,9 @@ import android.content.res.ColorStateList
 import android.view.View
 import androidx.fragment.app.viewModels
 import com.daryl.mob23quizapp.R
+import com.daryl.mob23quizapp.core.Constants.LOGIN
+import com.daryl.mob23quizapp.core.Constants.REGISTER
 import com.daryl.mob23quizapp.core.utils.ResourceProvider
-import com.daryl.mob23quizapp.data.models.AuthState
-import com.daryl.mob23quizapp.data.models.AuthState.LOGIN
-import com.daryl.mob23quizapp.data.models.AuthState.REGISTER
 import com.daryl.mob23quizapp.data.models.Roles
 import com.daryl.mob23quizapp.data.models.User
 import com.daryl.mob23quizapp.databinding.FragmentLoginRegisterBinding
@@ -19,7 +18,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class LoginRegisterFragment : BaseFragment<FragmentLoginRegisterBinding>() {
     override val viewModel: LoginRegisterViewModel by viewModels()
     override fun getLayoutResource(): Int = R.layout.fragment_login_register
-    private var state: AuthState = LOGIN
+    private var state: String = LOGIN
     private var colorList: Map<String, ColorStateList>? = null
     override fun onBindView(view: View) {
         super.onBindView(view)
@@ -38,10 +37,9 @@ class LoginRegisterFragment : BaseFragment<FragmentLoginRegisterBinding>() {
             }
             mbRegister.setOnClickListener {
                 if(state == REGISTER) {
-                    val role = when(spinnerRoles.selectedItem.toString()) {
-                        "Teacher" -> Roles.TEACHER
-                        else -> Roles.STUDENT
-                    }
+                    val role = Roles.valueOf(
+                        spinnerRoles.selectedItem.toString().uppercase()
+                    )
                     viewModel.register(
                         User(etUsername.text.toString(), etEmail.text.toString(), role),
                         etPassword.text.toString(),
@@ -65,11 +63,11 @@ class LoginRegisterFragment : BaseFragment<FragmentLoginRegisterBinding>() {
             inputBoxes.forEach {
                 it.setText("")
                 if(it.id == etUsername.id || it.id == etPassword2.id) {
-                    it.visibility = setVisibility()
+                    it.visibility = setVisibility(state == LOGIN)
                 }
             }
             spinnerRoles.setSelection(0)
-            spinnerParent.visibility = setVisibility()
+            spinnerParent.visibility = setVisibility(state == LOGIN)
         }
     }
     private fun changeButtonAppearance(clickedButton: MaterialButton) {
@@ -86,5 +84,4 @@ class LoginRegisterFragment : BaseFragment<FragmentLoginRegisterBinding>() {
             }
         }
     }
-    private fun setVisibility(): Int = if(state == LOGIN) View.GONE else View.VISIBLE
 }

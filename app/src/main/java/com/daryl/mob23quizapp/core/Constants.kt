@@ -9,6 +9,8 @@ object Constants {
 
     const val LOGIN = "LOGIN"
     const val REGISTER = "REGISTER"
+    const val ADD = "ADD"
+    const val EDIT = "EDIT"
 
     val COLOR_LIST = setOf("Red", "Blue", "Green", "Yellow", "Purple", "Grey", "White", "Black")
 }

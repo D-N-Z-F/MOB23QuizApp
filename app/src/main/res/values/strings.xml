@@ -4,6 +4,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="menu">Menu</string>
     <string name="home">Home</string>
+    <string name="dashboard">Dashboard</string>
     <string name="placeholder">Placeholder</string>
     <string name="icon_desc">Icon</string>
     <string name="username_insert">Insert Username</string>
@@ -14,6 +15,17 @@
     <string name="register">REGISTER</string>
     <string name="sign_in_header">Sign In</string>
     <string name="success_message">%1$s successful.</string>
+    <string name="logout">Logout</string>
+    <string name="name_insert">Insert Name</string>
+    <string name="category_insert">Insert Category</string>
+    <string name="time_limit_insert">Insert Time Limit</string>
+    <string name="seconds">Seconds</string>
+    <string name="import_csv">Import CSV</string>
+    <string name="no_file_selected">No File Selected</string>
+    <string name="time_limit_per_question">Time Limit Per Question</string>
+    <string name="add">ADD</string>
+    <string name="edit">EDIT</string>
+    <string name="empty">Nothing to show.</string>
     <string-array name="roles">
         <item>Student</item>
         <item>Teacher</item>

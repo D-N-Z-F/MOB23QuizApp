@@ -19,7 +19,6 @@
             android:layout_marginEnd="@dimen/s"
             android:layout_gravity="top|end"
             android:src="@drawable/ic_copy"
-            app:tint="@color/grey"
             android:contentDescription="@string/icon_desc"/>
 
         <ImageView
@@ -30,7 +29,6 @@
             android:layout_marginEnd="@dimen/s"
             android:layout_gravity="bottom|end"
             android:src="@drawable/ic_delete"
-            app:tint="@color/red"
             android:contentDescription="@string/icon_desc"/>
 
         <LinearLayout
@@ -52,48 +50,40 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="QUIZ EXAMPLE NAME"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:textSize="@dimen/extra_large_text_size"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/xs"
                 android:orientation="horizontal" >
 
-                <com.google.android.material.button.MaterialButton
+                <TextView
                     android:id="@+id/tvCategory"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="@dimen/xxxs"
                     android:text="Science"
-                    android:minWidth="@dimen/zero"
-                    android:minHeight="@dimen/zero"
-                    app:cornerRadius="@dimen/xxxxs"
-                    app:backgroundTint="@color/blue" />
+                    android:textColor="@color/white"/>
 
-                <com.google.android.material.button.MaterialButton
+                <TextView
                     android:id="@+id/tvNoOfQuestions"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/s"
-                    android:padding="@dimen/xxxxs"
                     android:text="20"
-                    android:minWidth="@dimen/zero"
-                    android:minHeight="@dimen/zero"
-                    app:cornerRadius="@dimen/xxxxs"
-                    android:drawableEnd="@drawable/ic_questions"
-                    app:backgroundTint="@color/blue" />
+                    android:textColor="@color/white"
+                    android:drawablePadding="@dimen/xxxxs"
+                    app:drawableEndCompat="@drawable/ic_questions" />
 
-                <com.google.android.material.button.MaterialButton
+                <TextView
                     android:id="@+id/tvTimeLimit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="@dimen/xxxxs"
                     android:text="10"
-                    android:minWidth="@dimen/zero"
-                    android:minHeight="@dimen/zero"
-                    app:cornerRadius="@dimen/xxxxs"
-                    android:drawableEnd="@drawable/ic_timer"
-                    app:backgroundTint="@color/blue" />
+                    android:textColor="@color/white"
+                    android:drawablePadding="@dimen/xxxxs"
+                    app:drawableEndCompat="@drawable/ic_timer" />
 
             </LinearLayout>
 

@@ -35,7 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/m"
             android:hint="@string/username_insert"
-            android:autofillHints="First Name"
+            android:autofillHints="Username"
             android:inputType="text"
             android:background="@drawable/rounded_edit_text_bg"
             android:visibility="gone"/>

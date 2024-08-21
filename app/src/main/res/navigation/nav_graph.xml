@@ -7,17 +7,25 @@
     <fragment
         android:id="@+id/loginRegisterFragment"
         android:name="com.daryl.mob23quizapp.ui.loginRegister.LoginRegisterFragment"
-        android:label="LoginRegisterFragment" >
+        android:label="Sign In" >
         <action
-            android:id="@+id/actionLoginRegisterToHome"
-            app:destination="@id/homeFragment"
+            android:id="@+id/actionLoginRegisterToTeacherDashboard"
+            app:destination="@id/teacherDashboardFragment"
             app:popUpTo="@id/loginRegisterFragment"
             app:popUpToInclusive="true"/>
     </fragment>
 
     <fragment
-        android:id="@+id/homeFragment"
-        android:name="com.daryl.mob23quizapp.ui.home.HomeFragment"
-        android:label="Home" />
+        android:id="@+id/teacherDashboardFragment"
+        android:name="com.daryl.mob23quizapp.ui.teacherDashboard.TeacherDashboardFragment"
+        android:label="Home" >
+        <action
+            android:id="@+id/actionTeacherDashboardToAddQuiz"
+            app:destination="@id/addQuizFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addQuizFragment"
+        android:name="com.daryl.mob23quizapp.ui.addQuiz.AddQuizFragment"
+        android:label="Add Quiz" />
 
 </navigation>

@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import com.daryl.mob23quizapp.core.utils.Utils.debugLog
 import com.daryl.mob23quizapp.data.models.Quiz
 import com.daryl.mob23quizapp.databinding.ItemQuizBinding
 
@@ -21,7 +22,7 @@ class QuizAdapter(
     inner class QuizViewHolder(private val binding: ItemQuizBinding): ViewHolder(binding.root) {
         fun bind(quiz: Quiz) {
             binding.run {
-                tvID.text = quiz.id.toString()
+                debugLog()("QUIZ: $quiz")
                 tvName.text = quiz.name
                 tvCategory.text = quiz.category
                 tvNoOfQuestions.text = quiz.questions.size.toString()

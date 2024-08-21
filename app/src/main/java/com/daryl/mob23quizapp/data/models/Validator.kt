@@ -7,9 +7,9 @@ data class Validator(
 ) {
     companion object {
         fun validate(vararg fields: Validator): String? {
-            fields.forEachIndexed { index, field ->
+            fields.forEach { field ->
                 val value = field.value
-                if(index == fields.lastIndex) {
+                if(field.errorMessage.contains("Password")) {
                     val midIdx = value.length / 2
                     val password = value.substring(0, midIdx)
                     val password2 = value.substring(midIdx)

@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.daryl.mob23quizapp.R
+import com.daryl.mob23quizapp.core.Constants.ADD
 import com.daryl.mob23quizapp.core.Constants.ERROR
 import com.daryl.mob23quizapp.core.Constants.INFO
 import com.daryl.mob23quizapp.core.Constants.LOGIN
@@ -45,15 +46,23 @@ abstract class BaseFragment<T: ViewDataBinding>: Fragment() {
                 signIn.collect {
                     showSnackBar(view, it, SUCCESS)
                     findNavController().navigate(
-                        LoginRegisterFragmentDirections.actionLoginRegisterToHome()
+                        LoginRegisterFragmentDirections.actionLoginRegisterToTeacherDashboard()
                     )
                 }
             }
             lifecycleScope.launch {
                 error.collect { showSnackBar(view, it, ERROR) }
             }
+            lifecycleScope.launch {
+                submit.collect {
+                    showSnackBar(view, it, INFO)
+                    if(it.contains(ADD)) findNavController().popBackStack()
+                }
+            }
         }
     }
+
+    protected fun setVisibility(condition: Boolean): Int = if(condition) View.GONE else View.VISIBLE
 
     private fun showToast(message: String) {
         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
