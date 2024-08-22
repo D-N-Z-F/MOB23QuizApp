@@ -33,9 +33,7 @@ class ManageStudentsFragment : BaseFragment<FragmentManageStudentsBinding>() {
     private fun setupAdapter() {
         adapter = StudentAdapter(emptyList())
 
-        binding?.rvStudents?.let {
-            it.adapter = adapter
-            it.layoutManager = LinearLayoutManager(requireContext())
-        }
+        binding?.rvStudents?.adapter = adapter
+        binding?.rvStudents?.layoutManager = LinearLayoutManager(requireContext())
     }
 }

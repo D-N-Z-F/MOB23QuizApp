@@ -32,6 +32,7 @@
             android:contentDescription="@string/icon_desc"/>
 
         <LinearLayout
+            android:id="@+id/llQuiz"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="@dimen/s"

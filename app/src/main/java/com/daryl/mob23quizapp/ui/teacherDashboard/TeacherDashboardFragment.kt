@@ -52,11 +52,14 @@ class TeacherDashboardFragment : BaseFragment<FragmentTeacherDashboardBinding>()
         adapter.listener = object : QuizAdapter.QuizListener {
             override fun onClickCopy(id: String) { copyToClipboard(id) }
             override fun onClickDelete(id: String) { viewModel.deleteQuiz(id) }
+            override fun onClickItem(id: String) {
+                findNavController().navigate(
+                    TeacherDashboardFragmentDirections.actionTeacherDashboardToViewQuiz(id)
+                )
+            }
         }
 
-        binding?.rvQuizzes?.let {
-            it.adapter = adapter
-            it.layoutManager = LinearLayoutManager(requireContext())
-        }
+        binding?.rvQuizzes?.adapter = adapter
+        binding?.rvQuizzes?.layoutManager = LinearLayoutManager(requireContext())
     }
 }

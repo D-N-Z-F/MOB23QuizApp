@@ -22,6 +22,9 @@
         <action
             android:id="@+id/actionTeacherDashboardToAddQuiz"
             app:destination="@id/addQuizFragment" />
+        <action
+            android:id="@+id/actionTeacherDashboardToViewQuiz"
+            app:destination="@id/viewQuizFragment" />
     </fragment>
     <fragment
         android:id="@+id/addQuizFragment"
@@ -31,5 +34,11 @@
         android:id="@+id/manageStudentsFragment"
         android:name="com.daryl.mob23quizapp.ui.manageStudents.ManageStudentsFragment"
         android:label="Manage Students" />
+    <fragment
+        android:id="@+id/viewQuizFragment"
+        android:name="com.daryl.mob23quizapp.ui.viewQuiz.ViewQuizFragment"
+        android:label="Quiz Details" >
+        <argument android:name="quizId" app:argType="string" />
+    </fragment>
 
 </navigation>

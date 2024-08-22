@@ -27,6 +27,7 @@
     <string name="edit">EDIT</string>
     <string name="empty">Nothing to show.</string>
     <string name="manage_students">Manage Students</string>
+    <string name="see">See %1$s</string>
     <string-array name="roles">
         <item>Student</item>
         <item>Teacher</item>

@@ -31,6 +31,7 @@ class QuizAdapter(
                 tvTimeLimit.text = quiz.timePerQuestion.toString()
                 ivCopy.setOnClickListener { listener?.onClickCopy(quiz.id!!) }
                 ivDelete.setOnClickListener { listener?.onClickDelete(quiz.id!!) }
+                llQuiz.setOnClickListener { listener?.onClickItem(quiz.id!!) }
             }
         }
     }
@@ -41,5 +42,6 @@ class QuizAdapter(
     interface QuizListener {
         fun onClickCopy(id: String)
         fun onClickDelete(id: String)
+        fun onClickItem(id: String)
     }
 }

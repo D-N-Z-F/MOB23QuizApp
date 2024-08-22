@@ -1,7 +1,5 @@
 package com.daryl.mob23quizapp.ui.loginRegister
 
-import android.content.SharedPreferences
-import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.daryl.mob23quizapp.R
 import com.daryl.mob23quizapp.core.Constants.LOGIN
@@ -9,7 +7,6 @@ import com.daryl.mob23quizapp.core.Constants.REGISTER
 import com.daryl.mob23quizapp.core.services.AuthService
 import com.daryl.mob23quizapp.core.utils.ResourceProvider
 import com.daryl.mob23quizapp.core.utils.Utils.capitalize
-import com.daryl.mob23quizapp.data.models.Roles
 import com.daryl.mob23quizapp.data.models.User
 import com.daryl.mob23quizapp.data.models.Validator
 import com.daryl.mob23quizapp.data.repositories.UserRepo
