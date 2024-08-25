@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.daryl.mob23quizapp.R
 import com.daryl.mob23quizapp.core.Constants.ADD
@@ -18,9 +19,10 @@ import com.daryl.mob23quizapp.core.Constants.INFO
 import com.daryl.mob23quizapp.core.Constants.SUCCESS
 import com.daryl.mob23quizapp.core.utils.Utils.capitalize
 import com.daryl.mob23quizapp.core.utils.Utils.debugLog
-import com.daryl.mob23quizapp.data.models.Roles
+import com.daryl.mob23quizapp.core.utils.Utils.popUpOptions
+import com.daryl.mob23quizapp.data.models.Roles.TEACHER
+import com.daryl.mob23quizapp.data.models.Roles.STUDENT
 import com.daryl.mob23quizapp.ui.MainActivity
-import com.daryl.mob23quizapp.ui.loginRegister.LoginRegisterFragmentDirections
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
@@ -45,9 +47,15 @@ abstract class BaseFragment<T: ViewDataBinding>: Fragment() {
         viewModel.run {
             lifecycleScope.launch {
                 signIn.collect {
-                    showSnackBar(view, it, SUCCESS)
+                    val (string, role) = it
+                    showSnackBar(view, string, SUCCESS)
+                    (requireActivity() as? MainActivity)?.setupNavViewMenu(role)
+                    val destination = when(role) {
+                        TEACHER -> R.id.teacherDashboardFragment
+                        else -> R.id.studentHomeFragment
+                    }
                     findNavController().navigate(
-                        LoginRegisterFragmentDirections.actionLoginRegisterToTeacherDashboard()
+                        destination, null, popUpOptions(R.id.loginRegisterFragment, true)
                     )
                 }
             }
@@ -59,9 +67,6 @@ abstract class BaseFragment<T: ViewDataBinding>: Fragment() {
                     showSnackBar(view, it, INFO)
                     if(it.contains(ADD.capitalize())) findNavController().popBackStack()
                 }
-            }
-            lifecycleScope.launch {
-                role.collect { (requireActivity() as? MainActivity)?.setupNavViewMenu(it) }
             }
         }
     }

@@ -52,7 +52,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/m"
                 android:hint="@string/time_limit_insert"
-                android:autofillHints="Name"
+                android:autofillHints="Time"
                 android:inputType="number"
                 android:background="@drawable/rounded_edit_text_bg"/>
 

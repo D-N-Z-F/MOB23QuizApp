@@ -12,6 +12,7 @@ import com.daryl.mob23quizapp.data.models.Question
 import com.daryl.mob23quizapp.data.models.Quiz
 import com.daryl.mob23quizapp.data.models.Validator
 import com.daryl.mob23quizapp.data.repositories.QuizRepo
+import com.daryl.mob23quizapp.data.repositories.UserRepo
 import com.daryl.mob23quizapp.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -20,6 +21,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AddQuizViewModel @Inject constructor(
+    private val userRepo: UserRepo,
     private val quizRepo: QuizRepo,
     private val storageService: StorageService,
     private val resourceProvider: ResourceProvider

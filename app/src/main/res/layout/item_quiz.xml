@@ -11,80 +11,91 @@
         app:cardCornerRadius="@dimen/xxs"
         android:elevation="@dimen/xs">
 
-        <ImageView
-            android:id="@+id/ivCopy"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/s"
-            android:layout_marginEnd="@dimen/s"
-            android:layout_gravity="top|end"
-            android:src="@drawable/ic_copy"
-            android:contentDescription="@string/icon_desc"/>
-
-        <ImageView
-            android:id="@+id/ivDelete"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/s"
-            android:layout_marginEnd="@dimen/s"
-            android:layout_gravity="bottom|end"
-            android:src="@drawable/ic_delete"
-            android:contentDescription="@string/icon_desc"/>
-
         <LinearLayout
-            android:id="@+id/llQuiz"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/s"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/tvID"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="QUIZ ID: 12345678"
-                android:textStyle="italic"
-                android:textSize="@dimen/tiny_text_size" />
-
-            <TextView
-                android:id="@+id/tvName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="QUIZ EXAMPLE NAME"
-                android:textStyle="bold"
-                android:textSize="@dimen/extra_large_text_size"/>
+            android:orientation="horizontal">
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:id="@+id/llQuiz"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/xs"
-                android:orientation="horizontal" >
+                android:layout_weight="1"
+                android:padding="@dimen/s"
+                android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/tvCategory"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/tvID"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Science"
-                    android:textColor="@color/white"/>
+                    android:text="QUIZ ID: 12345678"
+                    android:textStyle="italic"
+                    android:textSize="@dimen/tiny_text_size" />
 
                 <TextView
-                    android:id="@+id/tvNoOfQuestions"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/tvName"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/s"
-                    android:text="20"
-                    android:textColor="@color/white"
-                    android:drawablePadding="@dimen/xxxxs"
-                    app:drawableEndCompat="@drawable/ic_questions" />
+                    android:text="QUIZ EXAMPLE NAME"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/extra_large_text_size"/>
 
-                <TextView
-                    android:id="@+id/tvTimeLimit"
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/xs"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:id="@+id/tvCategory"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Science"
+                        android:textColor="@color/white"/>
+
+                    <TextView
+                        android:id="@+id/tvNoOfQuestions"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/s"
+                        android:text="20"
+                        android:textColor="@color/white"
+                        android:drawablePadding="@dimen/xxxxs"
+                        app:drawableEndCompat="@drawable/ic_questions" />
+
+                    <TextView
+                        android:id="@+id/tvTimeLimit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="10"
+                        android:textColor="@color/white"
+                        android:drawablePadding="@dimen/xxxxs"
+                        app:drawableEndCompat="@drawable/ic_timer" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <ImageView
+                    android:id="@+id/ivCopy"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="10"
-                    android:textColor="@color/white"
-                    android:drawablePadding="@dimen/xxxxs"
-                    app:drawableEndCompat="@drawable/ic_timer" />
+                    android:layout_margin="@dimen/s"
+                    android:src="@drawable/ic_copy"
+                    android:contentDescription="@string/icon_desc"/>
+
+                <ImageView
+                    android:id="@+id/ivDelete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/s"
+                    android:src="@drawable/ic_delete"
+                    android:contentDescription="@string/icon_desc"/>
 
             </LinearLayout>
 

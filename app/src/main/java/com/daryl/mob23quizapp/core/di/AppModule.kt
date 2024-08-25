@@ -2,6 +2,7 @@ package com.daryl.mob23quizapp.core.di
 
 import android.content.Context
 import com.daryl.mob23quizapp.core.services.AuthService
+import com.daryl.mob23quizapp.core.services.ModalService
 import com.daryl.mob23quizapp.core.services.StorageService
 import com.daryl.mob23quizapp.core.utils.ResourceProvider
 import dagger.Module
@@ -17,16 +18,19 @@ class AppModule {
     @Provides
     @Singleton
     fun provideAuthService(): AuthService = AuthService()
-
     @Provides
     @Singleton
     fun provideResourceProvider(
         @ApplicationContext context: Context
     ): ResourceProvider = ResourceProvider(context)
-
     @Provides
     @Singleton
     fun provideStorageService(
         @ApplicationContext context: Context
     ): StorageService = StorageService(context)
+    @Provides
+    @Singleton
+    fun provideModalService(
+        @ApplicationContext context: Context
+    ): ModalService = ModalService(context)
 }

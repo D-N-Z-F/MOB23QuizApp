@@ -1,5 +1,6 @@
 package com.daryl.mob23quizapp.ui
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -17,6 +18,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.daryl.mob23quizapp.R
 import com.daryl.mob23quizapp.core.services.AuthService
 import com.daryl.mob23quizapp.core.utils.Utils.debugLog
+import com.daryl.mob23quizapp.core.utils.Utils.popUpOptions
 import com.daryl.mob23quizapp.data.models.Roles
 import com.daryl.mob23quizapp.data.models.Roles.TEACHER
 import com.daryl.mob23quizapp.data.repositories.UserRepo
@@ -47,13 +49,10 @@ class MainActivity : AppCompatActivity() {
             setupNavViewMenu(user.role)
             val destination = when(user.role) {
                 TEACHER -> R.id.teacherDashboardFragment
-                else -> -1
+                else -> R.id.studentHomeFragment
             }
             navController.navigate(
-                destination,
-                null,
-                NavOptions.Builder()
-                    .setPopUpTo(R.id.loginRegisterFragment, true).build()
+                destination, null, popUpOptions(R.id.loginRegisterFragment, true)
             )
         }
     }
@@ -65,7 +64,7 @@ class MainActivity : AppCompatActivity() {
     private fun setupDrawerNavigation() {
         val drawerLayout = findViewById<DrawerLayout>(R.id.drawerLayout)
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
-        val navList = setOf(R.id.teacherDashboardFragment)
+        val navList = setOf(R.id.teacherDashboardFragment, R.id.studentHomeFragment)
         appBarConfig = AppBarConfiguration(navList, drawerLayout)
 
         setupToolbarConfig(toolbar)
@@ -93,6 +92,7 @@ class MainActivity : AppCompatActivity() {
         }
         setupNavViewConfig(navView)
     }
+    @SuppressLint("RestrictedApi")
     private fun setupNavViewConfig(navView: NavigationView) {
         val drawerLayout = findViewById<DrawerLayout>(R.id.drawerLayout)
         navView.apply {
@@ -103,8 +103,7 @@ class MainActivity : AppCompatActivity() {
                 navController.navigate(
                     R.id.loginRegisterFragment,
                     null,
-                    NavOptions.Builder()
-                        .setPopUpTo(navController.graph.startDestinationId, true).build()
+                    navController.currentDestination?.id?.let { id -> popUpOptions(id, true) }
                 )
                 menu.clear()
                 true

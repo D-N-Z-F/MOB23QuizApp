@@ -7,13 +7,7 @@
     <fragment
         android:id="@+id/loginRegisterFragment"
         android:name="com.daryl.mob23quizapp.ui.loginRegister.LoginRegisterFragment"
-        android:label="Sign In" >
-        <action
-            android:id="@+id/actionLoginRegisterToTeacherDashboard"
-            app:destination="@id/teacherDashboardFragment"
-            app:popUpTo="@id/loginRegisterFragment"
-            app:popUpToInclusive="true"/>
-    </fragment>
+        android:label="Sign In" />
 
     <fragment
         android:id="@+id/teacherDashboardFragment"
@@ -40,5 +34,13 @@
         android:label="Quiz Details" >
         <argument android:name="quizId" app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/studentHomeFragment"
+        android:name="com.daryl.mob23quizapp.ui.studentHome.StudentHomeFragment"
+        android:label="Home" />
+    <fragment
+        android:id="@+id/quizHistoryFragment"
+        android:name="com.daryl.mob23quizapp.ui.quizHistory.QuizHistoryFragment"
+        android:label="Quiz History" />
 
 </navigation>

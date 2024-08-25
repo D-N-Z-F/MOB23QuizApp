@@ -70,16 +70,35 @@
 
             </LinearLayout>
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/mbSwitch"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/m"
-                android:layout_marginHorizontal="@dimen/l"
-                android:text="@string/see"
-                app:cornerRadius="@dimen/xxxs"
-                android:elevation="@dimen/xs"
-                android:backgroundTint="@color/blue"/>
+                android:layout_marginHorizontal="@dimen/xm"
+                android:orientation="horizontal" >
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/mbSwitch"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5"
+                    android:text="@string/see"
+                    app:cornerRadius="@dimen/xxxs"
+                    android:elevation="@dimen/xs"
+                    android:backgroundTint="@color/blue"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/mbSettings"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/s"
+                    android:layout_weight="1"
+                    app:icon="@drawable/ic_settings"
+                    app:cornerRadius="@dimen/xxxs"
+                    android:elevation="@dimen/xs"
+                    android:backgroundTint="@color/blue"/>
+
+            </LinearLayout>
 
         </LinearLayout>
 

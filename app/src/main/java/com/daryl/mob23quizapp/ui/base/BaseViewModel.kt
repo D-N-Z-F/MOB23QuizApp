@@ -8,14 +8,12 @@ import kotlinx.coroutines.flow.SharedFlow
 abstract class BaseViewModel: ViewModel() {
     protected val _finish = MutableSharedFlow<String>()
     val finish: SharedFlow<String> = _finish
-    protected val _signIn = MutableSharedFlow<String>()
-    val signIn: SharedFlow<String> = _signIn
+    protected val _signIn = MutableSharedFlow<Pair<String, Roles>>()
+    val signIn: SharedFlow<Pair<String, Roles>> = _signIn
     protected val _submit = MutableSharedFlow<String>()
     val submit: SharedFlow<String> = _submit
     protected val _error = MutableSharedFlow<String>()
     val error: SharedFlow<String> = _error
-    protected val _role = MutableSharedFlow<Roles>()
-    val role: SharedFlow<Roles> = _role
 
     suspend fun <T> globalErrorHandler(func: suspend () -> T?): T? =
         try {
@@ -25,5 +23,4 @@ abstract class BaseViewModel: ViewModel() {
             e.printStackTrace()
             null
         }
-    suspend fun triggerMenuSetup(role: Roles) { _role.emit(role) }
 }

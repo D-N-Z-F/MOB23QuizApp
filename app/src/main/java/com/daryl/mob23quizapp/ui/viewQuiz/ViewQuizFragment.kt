@@ -6,6 +6,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.daryl.mob23quizapp.R
+import com.daryl.mob23quizapp.core.services.ModalService
+import com.daryl.mob23quizapp.core.utils.Utils.debugLog
 import com.daryl.mob23quizapp.data.models.Quiz
 import com.daryl.mob23quizapp.databinding.FragmentViewQuizBinding
 import com.daryl.mob23quizapp.ui.adapters.QuestionAdapter
@@ -42,6 +44,11 @@ class ViewQuizFragment : BaseFragment<FragmentViewQuizBinding>() {
             tvCategory.text = quiz.category
             tvNoOfQuestions.text = quiz.questions.size.toString()
             tvTimeLimit.text = quiz.timePerQuestion.toString()
+            mbSettings.setOnClickListener {
+                ModalService(requireContext()).modalEditQuiz {
+                    viewModel.updateQuiz(quiz.copy(timePerQuestion = it))
+                }
+            }
         }
     }
     private fun setupAdapter() {

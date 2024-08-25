@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.daryl.mob23quizapp.R
 import com.daryl.mob23quizapp.core.Constants.COPY_ID
+import com.daryl.mob23quizapp.core.Constants.HOLDER_TYPE_1
 import com.daryl.mob23quizapp.data.models.Question
 import com.daryl.mob23quizapp.data.models.Quiz
 import com.daryl.mob23quizapp.databinding.FragmentTeacherDashboardBinding
@@ -35,7 +36,7 @@ class TeacherDashboardFragment : BaseFragment<FragmentTeacherDashboardBinding>()
     override fun onBindData(view: View) {
         super.onBindData(view)
         lifecycleScope.launch {
-            viewModel.getAllQuizzes().collect {
+            viewModel.getTeacherQuizzes().collect {
                 adapter.setQuizzes(it)
                 binding?.rvQuizzes?.visibility = setVisibility(it.isEmpty())
                 binding?.tvEmpty?.visibility = setVisibility(it.isNotEmpty())
@@ -48,7 +49,7 @@ class TeacherDashboardFragment : BaseFragment<FragmentTeacherDashboardBinding>()
         clipboard.setPrimaryClip(ClipData.newPlainText(COPY_ID, id))
     }
     private fun setupAdapter() {
-        adapter = QuizAdapter(emptyList())
+        adapter = QuizAdapter(emptyList(), HOLDER_TYPE_1)
         adapter.listener = object : QuizAdapter.QuizListener {
             override fun onClickCopy(id: String) { copyToClipboard(id) }
             override fun onClickDelete(id: String) { viewModel.deleteQuiz(id) }

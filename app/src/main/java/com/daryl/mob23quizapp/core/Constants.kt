@@ -15,5 +15,8 @@ object Constants {
     const val EDIT = "EDIT"
     const val DELETE = "DELETE"
 
+    const val HOLDER_TYPE_1 = 1
+    const val HOLDER_TYPE_2 = 2
+
     val COLOR_LIST = setOf("Red", "Blue", "Green", "Yellow", "Purple", "Grey", "White", "Black")
 }

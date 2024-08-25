@@ -2,6 +2,7 @@ package com.daryl.mob23quizapp.data.models
 
 data class Quiz(
     val id: String? = null,
+    val teacherId: String? = null,
     val name: String,
     val category: String,
     val questions: List<Question>,
@@ -10,6 +11,7 @@ data class Quiz(
 ) {
     fun toMap(): Map<String, Any?> =
         mapOf(
+            "teacherId" to teacherId,
             "name" to name,
             "category" to category,
             "questions" to questions,
@@ -27,6 +29,7 @@ data class Quiz(
             }
         fun fromMap(map: Map<*, *>): Quiz =
             Quiz(
+                teacherId = map["teacherId"].toString(),
                 name = map["name"].toString(),
                 category = map["category"].toString(),
                 questions = (map["questions"] as? List<*>)?.let {

@@ -27,10 +27,11 @@ class LoginRegisterViewModel @Inject constructor(
             globalErrorHandler {
                 authService.login(email, password) ?: throw Exception("User doesn't exist.")
                 val user = userRepo.getUserById() ?: throw Exception("User doesn't exist.")
-                triggerMenuSetup(user.role)
-            }?.let {
                 _signIn.emit(
-                    resourceProvider.getString(R.string.success_message, LOGIN.capitalize())
+                    Pair(
+                        resourceProvider.getString(R.string.success_message, LOGIN.capitalize()),
+                        user.role
+                    )
                 )
             }
         }
@@ -43,9 +44,11 @@ class LoginRegisterViewModel @Inject constructor(
                 val isRegistered = authService.register(user.email, password)
                 if(!isRegistered) throw Exception("Registration failed, please retry later.")
                 userRepo.createUser(user)
-            }?.let {
                 _signIn.emit(
-                    resourceProvider.getString(R.string.success_message, REGISTER.capitalize())
+                    Pair(
+                        resourceProvider.getString(R.string.success_message, REGISTER.capitalize()),
+                        user.role
+                    )
                 )
             }
         }

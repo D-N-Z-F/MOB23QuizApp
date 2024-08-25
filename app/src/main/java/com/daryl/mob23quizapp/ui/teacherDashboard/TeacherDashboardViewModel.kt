@@ -18,7 +18,7 @@ class TeacherDashboardViewModel @Inject constructor(
     private val quizRepo: QuizRepo,
     private val resourceProvider: ResourceProvider
 ): BaseViewModel() {
-    fun getAllQuizzes(): Flow<List<Quiz>> = quizRepo.getAllQuizzes()
+    fun getTeacherQuizzes(): Flow<List<Quiz>> = quizRepo.getTeacherQuizzes()
     fun deleteQuiz(id: String) {
         viewModelScope.launch(Dispatchers.IO) {
             globalErrorHandler {
