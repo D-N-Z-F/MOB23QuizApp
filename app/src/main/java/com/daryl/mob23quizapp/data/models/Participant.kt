@@ -1,14 +1,14 @@
 package com.daryl.mob23quizapp.data.models
 
 data class Participant(
-    val studentId: String,
+    val studentEmail: String,
     val score: Int,
     val timeTaken: Int
 ) {
     companion object {
         fun fromMap(map: Map<*, *>): Participant =
             Participant(
-                studentId = map["studentId"].toString(),
+                studentEmail = map["studentEmail"].toString(),
                 score = map["score"].toString().toInt(),
                 timeTaken = map["timeTaken"].toString().toInt()
             )

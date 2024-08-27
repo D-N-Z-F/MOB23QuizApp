@@ -3,7 +3,7 @@ package com.daryl.mob23quizapp.data.models
 data class Question(
     val title: String,
     val options: List<String>,
-    val answer: String
+    val answer: String,
 ) {
     companion object {
         fun fromMap(map: Map<*, *>): Question =

@@ -5,6 +5,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.daryl.mob23quizapp.R
+import com.daryl.mob23quizapp.core.Constants.HOLDER_TYPE_1
 import com.daryl.mob23quizapp.databinding.FragmentManageStudentsBinding
 import com.daryl.mob23quizapp.ui.adapters.StudentAdapter
 import com.daryl.mob23quizapp.ui.base.BaseFragment
@@ -31,7 +32,7 @@ class ManageStudentsFragment : BaseFragment<FragmentManageStudentsBinding>() {
         }
     }
     private fun setupAdapter() {
-        adapter = StudentAdapter(emptyList())
+        adapter = StudentAdapter(emptyList(), HOLDER_TYPE_1, null)
 
         binding?.rvStudents?.adapter = adapter
         binding?.rvStudents?.layoutManager = LinearLayoutManager(requireContext())

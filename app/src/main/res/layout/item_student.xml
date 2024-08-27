@@ -8,6 +8,7 @@
         android:layout_height="wrap_content"
         android:backgroundTint="@color/design_default_color_secondary"
         android:layout_margin="@dimen/xxs"
+        app:strokeColor="@android:color/transparent"
         app:cardCornerRadius="@dimen/xxs"
         android:elevation="@dimen/xs">
 
@@ -15,23 +16,65 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="@dimen/s"
-            android:orientation="vertical">
+            android:orientation="horizontal"
+            android:baselineAligned="false">
 
-            <TextView
-                android:id="@+id/tvEmail"
-                android:layout_width="match_parent"
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="STUDENT EXAMPLE EMAIL"
-                android:textStyle="italic"
-                android:textSize="@dimen/tiny_text_size" />
+                android:layout_weight="1"
+                android:orientation="vertical" >
 
-            <TextView
-                android:id="@+id/tvUsername"
-                android:layout_width="match_parent"
+                <TextView
+                    android:id="@+id/tvEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="STUDENT EXAMPLE EMAIL"
+                    android:textStyle="italic"
+                    android:textSize="@dimen/tiny_text_size" />
+
+                <TextView
+                    android:id="@+id/tvUsername"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="STUDENT EXAMPLE NAME"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/extra_large_text_size"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llDetails"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="STUDENT EXAMPLE NAME"
-                android:textStyle="bold"
-                android:textSize="@dimen/extra_large_text_size"/>
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:visibility="gone" >
+
+                <TextView
+                    android:id="@+id/tvTimeTaken"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="10"
+                    android:textColor="@color/white"
+                    android:drawablePadding="@dimen/xxxxs"
+                    app:drawableEndCompat="@drawable/ic_timer" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/mbScore"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/xxs"
+                    android:padding="@dimen/xxxs"
+                    android:minWidth="@dimen/zero"
+                    android:minHeight="@dimen/zero"
+                    android:textColor="@color/grey"
+                    android:textSize="@dimen/tiny_text_size"
+                    app:cornerRadius="@dimen/xxs"
+                    app:elevation="@dimen/xs"
+                    app:backgroundTint="@color/white" />
+
+            </LinearLayout>
 
         </LinearLayout>
 

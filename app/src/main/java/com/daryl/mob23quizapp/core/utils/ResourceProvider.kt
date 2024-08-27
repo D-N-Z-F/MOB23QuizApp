@@ -8,6 +8,6 @@ import androidx.annotation.StringRes
 class ResourceProvider(
     private val context: Context
 ) {
-    fun getString(@StringRes resId: Int, arg: String): String = context.getString(resId, arg)
+    fun getString(@StringRes resId: Int, vararg args: Any): String = context.getString(resId, *args)
     fun getColorList(@ColorRes resId: Int): ColorStateList = context.getColorStateList(resId)
 }

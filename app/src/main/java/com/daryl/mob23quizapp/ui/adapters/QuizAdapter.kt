@@ -1,29 +1,36 @@
 package com.daryl.mob23quizapp.ui.adapters
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isInvisible
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import com.daryl.mob23quizapp.R
+import com.daryl.mob23quizapp.core.Constants.HOLDER_TYPE_1
+import com.daryl.mob23quizapp.core.services.AuthService
+import com.daryl.mob23quizapp.core.utils.ResourceProvider
 import com.daryl.mob23quizapp.core.utils.Utils.debugLog
 import com.daryl.mob23quizapp.data.models.Quiz
 import com.daryl.mob23quizapp.databinding.ItemQuizBinding
+import javax.inject.Inject
 
 class QuizAdapter(
     private var quizzes: List<Quiz>,
-    private val holderType: Int
+    private val holderType: Int,
+    private val resourceProvider: ResourceProvider?
 ): RecyclerView.Adapter<QuizAdapter.BaseViewHolder>() {
+    private val authService = AuthService()
     var listener: QuizListener? = null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
         val binding = ItemQuizBinding.inflate(
             LayoutInflater.from(parent.context), parent, false
         )
         return when(holderType) {
-            1 -> TeacherQuizViewHolder(binding)
+            HOLDER_TYPE_1 -> TeacherQuizViewHolder(binding)
             else -> StudentQuizViewHolder(binding)
         }
     }
-
     override fun getItemCount(): Int = quizzes.size
     override fun onBindViewHolder(holder: BaseViewHolder, position: Int) =
         holder.bind(quizzes[position])
@@ -31,8 +38,8 @@ class QuizAdapter(
         private val binding: ItemQuizBinding
     ): BaseViewHolder(binding) {
         override fun bind(quiz: Quiz) {
+            super.bind(quiz)
             binding.run {
-                super.bind(quiz)
                 tvID.text = quiz.id
                 ivCopy.setOnClickListener { listener?.onClickCopy(quiz.id!!) }
                 ivDelete.setOnClickListener { listener?.onClickDelete(quiz.id!!) }
@@ -44,9 +51,20 @@ class QuizAdapter(
         private val binding: ItemQuizBinding
     ): BaseViewHolder(binding) {
         override fun bind(quiz: Quiz) {
+            super.bind(quiz)
             binding.run {
-                super.bind(quiz)
-                setOf(tvID, ivCopy, ivDelete).forEach { it.isInvisible = true }
+                tvID.visibility = View.GONE
+                llActions.visibility = View.GONE
+                val participant = quiz.participants.find {
+                    it.studentEmail == authService.getCurrentUser()?.email
+                }
+                participant?.let {
+                    tvTimeTaken.text = it.timeTaken.toString()
+                    mbScore.text = resourceProvider?.getString(
+                        R.string.score, it.score, quiz.questions.size
+                    )
+                    llDetails.visibility = View.VISIBLE
+                }
             }
         }
     }

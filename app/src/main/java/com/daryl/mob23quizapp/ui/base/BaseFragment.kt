@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
@@ -17,6 +18,7 @@ import com.daryl.mob23quizapp.core.Constants.ADD
 import com.daryl.mob23quizapp.core.Constants.ERROR
 import com.daryl.mob23quizapp.core.Constants.INFO
 import com.daryl.mob23quizapp.core.Constants.SUCCESS
+import com.daryl.mob23quizapp.core.services.ModalService
 import com.daryl.mob23quizapp.core.utils.Utils.capitalize
 import com.daryl.mob23quizapp.core.utils.Utils.debugLog
 import com.daryl.mob23quizapp.core.utils.Utils.popUpOptions
@@ -25,12 +27,16 @@ import com.daryl.mob23quizapp.data.models.Roles.STUDENT
 import com.daryl.mob23quizapp.ui.MainActivity
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 abstract class BaseFragment<T: ViewDataBinding>: Fragment() {
     protected abstract val viewModel: BaseViewModel
     protected var binding: T? = null
     protected abstract fun getLayoutResource(): Int
+    private lateinit var loadingModal: AlertDialog
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -42,13 +48,16 @@ abstract class BaseFragment<T: ViewDataBinding>: Fragment() {
     }
     protected open fun onBindView(view: View) {
         binding = DataBindingUtil.bind(view)
+        loadingModal = ModalService(requireContext()).createLoadingModal()
     }
     protected open fun onBindData(view: View) {
         viewModel.run {
             lifecycleScope.launch {
                 signIn.collect {
                     val (string, role) = it
-                    showSnackBar(view, string, SUCCESS)
+                    showSnackBar(view, string, INFO)
+                    delay(500)
+                    dismissLoadingModal()
                     (requireActivity() as? MainActivity)?.setupNavViewMenu(role)
                     val destination = when(role) {
                         TEACHER -> R.id.teacherDashboardFragment
@@ -60,11 +69,17 @@ abstract class BaseFragment<T: ViewDataBinding>: Fragment() {
                 }
             }
             lifecycleScope.launch {
-                error.collect { showSnackBar(view, it, ERROR) }
+                error.collect {
+                    showSnackBar(view, it, ERROR)
+                    delay(500)
+                    dismissLoadingModal()
+                }
             }
             lifecycleScope.launch {
                 submit.collect {
-                    showSnackBar(view, it, INFO)
+                    showSnackBar(requireView(), it, SUCCESS)
+                    delay(500)
+                    dismissLoadingModal()
                     if(it.contains(ADD.capitalize())) findNavController().popBackStack()
                 }
             }
@@ -87,4 +102,6 @@ abstract class BaseFragment<T: ViewDataBinding>: Fragment() {
             .setBackgroundTint(ContextCompat.getColor(requireContext(), backgroundTint))
             .show()
     }
+    protected fun showLoadingModal() { if(!loadingModal.isShowing) loadingModal.show() }
+    protected fun dismissLoadingModal() { if(loadingModal.isShowing) loadingModal.dismiss() }
 }

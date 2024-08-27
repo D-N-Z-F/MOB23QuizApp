@@ -7,6 +7,7 @@
         android:layout_height="wrap_content"
         android:backgroundTint="@color/design_default_color_secondary"
         android:layout_margin="@dimen/xxs"
+        app:strokeColor="@android:color/transparent"
         app:cardCornerRadius="@dimen/xxs"
         android:elevation="@dimen/xs">
 
@@ -26,8 +27,8 @@
                 android:textStyle="italic"
                 android:textSize="@dimen/extra_large_text_size" />
 
-            <RadioGroup
-                android:id="@+id/rgOptions"
+            <LinearLayout
+                android:id="@+id/llOptions"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/xs"
@@ -75,7 +76,7 @@
 
                 </LinearLayout>
 
-            </RadioGroup>
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/tvAnswer"

@@ -63,6 +63,9 @@ dependencies {
     // Hilt Dependency Injection
     implementation(libs.hilt.android)
     kapt(libs.hilt.android.compiler)
+
+    // Splash Screen
+    implementation(libs.androidx.core.splashscreen)
 }
 
 kapt {

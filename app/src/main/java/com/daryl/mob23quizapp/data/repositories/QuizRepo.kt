@@ -3,6 +3,7 @@ package com.daryl.mob23quizapp.data.repositories
 import com.daryl.mob23quizapp.core.services.AuthService
 import com.daryl.mob23quizapp.core.utils.Utils.debugLog
 import com.daryl.mob23quizapp.data.models.Quiz
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -13,7 +14,8 @@ import kotlinx.coroutines.tasks.await
 class QuizRepo(
     private val authService: AuthService
 ) {
-    private fun getUid(): String = authService.getUid() ?: throw Exception("User doesn't exist!")
+    private fun getUid(): String = authService.getUid() ?: throw Exception("User doesn't exist.")
+    private fun getCurrentUser(): FirebaseUser = authService.getCurrentUser() ?: throw Exception("User doesn't exist.")
     private fun getCollection(): CollectionReference =
         Firebase.firestore.collection("quizzes")
     fun getTeacherQuizzes() = callbackFlow<List<Quiz>> {
@@ -37,7 +39,7 @@ class QuizRepo(
             value?.documents?.map { snapshot ->
                 snapshot.data?.let { map ->
                     val quiz = Quiz.fromMap(map)
-                    if(quiz.participants.any { it.studentId == getUid() }) {
+                    if(quiz.participants.any { it.studentEmail == getCurrentUser().email }) {
                         history.add(quiz.copy(id = snapshot.id))
                     }
                 }

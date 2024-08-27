@@ -13,7 +13,7 @@ import kotlinx.coroutines.tasks.await
 class UserRepo(
     private val authService: AuthService
 ) {
-    private fun getUid(): String = authService.getUid() ?: throw Exception("User doesn't exist!")
+    private fun getUid(): String = authService.getUid() ?: throw Exception("User doesn't exist.")
     private fun getCollection(): CollectionReference =
         Firebase.firestore.collection("users")
     fun getAllStudents() = callbackFlow<List<User>> {

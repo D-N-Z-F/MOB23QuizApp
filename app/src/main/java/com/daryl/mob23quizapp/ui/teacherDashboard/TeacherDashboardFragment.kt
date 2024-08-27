@@ -49,10 +49,13 @@ class TeacherDashboardFragment : BaseFragment<FragmentTeacherDashboardBinding>()
         clipboard.setPrimaryClip(ClipData.newPlainText(COPY_ID, id))
     }
     private fun setupAdapter() {
-        adapter = QuizAdapter(emptyList(), HOLDER_TYPE_1)
+        adapter = QuizAdapter(emptyList(), HOLDER_TYPE_1, null)
         adapter.listener = object : QuizAdapter.QuizListener {
             override fun onClickCopy(id: String) { copyToClipboard(id) }
-            override fun onClickDelete(id: String) { viewModel.deleteQuiz(id) }
+            override fun onClickDelete(id: String) {
+                showLoadingModal()
+                viewModel.deleteQuiz(id)
+            }
             override fun onClickItem(id: String) {
                 findNavController().navigate(
                     TeacherDashboardFragmentDirections.actionTeacherDashboardToViewQuiz(id)

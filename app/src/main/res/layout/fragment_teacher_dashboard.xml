@@ -18,7 +18,8 @@
             android:textColor="@color/red"
             android:textAlignment="center"
             app:drawableTopCompat="@drawable/ic_empty"
-            android:layout_gravity="center" />
+            android:layout_gravity="center"
+            android:visibility="gone" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvQuizzes"

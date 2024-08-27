@@ -7,37 +7,119 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:gravity="center"
         tools:context=".ui.studentHome.StudentHomeFragment">
 
-        <TextView
+        <LinearLayout
+            android:id="@+id/llHome"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/app_name"
-            android:textSize="@dimen/huge_text_size"
-            android:textStyle="bold"
-            android:textAlignment="center"/>
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:visibility="visible">
 
-        <EditText
-            android:id="@+id/etQuizID"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/m"
-            android:padding="@dimen/s"
-            android:hint="@string/insert_quiz_id_here"
-            android:autofillHints="Quiz ID"
-            android:inputType="text"
-            android:background="@drawable/rounded_edit_text_bg"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/app_name"
+                android:textSize="@dimen/huge_text_size"
+                android:textStyle="bold"
+                android:textAlignment="center"/>
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/mbStart"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/m"
-            android:text="@string/start_quiz"
-            app:cornerRadius="@dimen/xxxs"
-            android:elevation="@dimen/xs"
-            android:backgroundTint="@color/design_default_color_secondary" />
+            <EditText
+                android:id="@+id/etQuizID"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/m"
+                android:layout_marginHorizontal="@dimen/m"
+                android:padding="@dimen/s"
+                android:hint="@string/insert_quiz_id_here"
+                android:autofillHints="Quiz ID"
+                android:inputType="text"
+                android:background="@drawable/rounded_edit_text_bg"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/mbStart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/m"
+                android:text="@string/start_quiz"
+                app:cornerRadius="@dimen/xxxs"
+                android:elevation="@dimen/xs"
+                android:backgroundTint="@color/design_default_color_secondary" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llQuiz"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingHorizontal="@dimen/xxs"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:visibility="gone">
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/xxs" >
+
+               <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:paddingVertical="@dimen/xxxs"
+                   android:orientation="horizontal"
+                   android:gravity="center" >
+
+                   <com.google.android.material.button.MaterialButton
+                       android:id="@+id/mbSubmit"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:padding="@dimen/xs"
+                       android:minWidth="@dimen/zero"
+                       android:minHeight="@dimen/zero"
+                       app:icon="@drawable/ic_complete"
+                       app:cornerRadius="@dimen/xxxs"
+                       android:elevation="@dimen/xs"
+                       android:backgroundTint="@color/design_default_color_secondary"
+                       app:iconGravity="textStart"
+                       app:iconPadding="0dp" />
+
+                   <TextView
+                       android:id="@+id/tvName"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_marginStart="@dimen/xs"
+                       android:text="QUIZ EXAMPLE NAME"
+                       android:textSize="@dimen/small_text_size" />
+
+                   <TextView
+                       android:id="@+id/tvTimeLimit"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_marginStart="@dimen/xs"
+                       android:layout_marginEnd="@dimen/xxxxs"
+                       android:text="Time Left: 10"
+                       android:textSize="@dimen/huge_text_size"
+                       android:textStyle="italic"/>
+
+                   <com.google.android.material.progressindicator.CircularProgressIndicator
+                       android:id="@+id/cpiTimeLimit"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:progress="100"
+                       app:indicatorSize="@dimen/xxl"/>
+
+               </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvQuestions"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingVertical="@dimen/xxs" />
+
+        </LinearLayout>
 
     </LinearLayout>
 </layout>

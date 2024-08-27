@@ -10,6 +10,7 @@ object Constants {
     const val ERROR = "ERROR"
 
     const val LOGIN = "LOGIN"
+    const val LOGOUT = "LOGOUT"
     const val REGISTER = "REGISTER"
     const val ADD = "ADD"
     const val EDIT = "EDIT"
@@ -17,6 +18,9 @@ object Constants {
 
     const val HOLDER_TYPE_1 = 1
     const val HOLDER_TYPE_2 = 2
+
+    const val PARTICIPANTS = "PARTICIPANTS"
+    const val QUESTIONS = "QUESTIONS"
 
     val COLOR_LIST = setOf("Red", "Blue", "Green", "Yellow", "Purple", "Grey", "White", "Black")
 }

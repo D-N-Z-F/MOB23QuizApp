@@ -32,11 +32,13 @@ class LoginRegisterFragment : BaseFragment<FragmentLoginRegisterBinding>() {
         binding?.run {
             mbLogin.setOnClickListener {
                 if(state == LOGIN) {
+                    showLoadingModal()
                     viewModel.login(etEmail.text.toString(), etPassword.text.toString())
                 } else toggleState(it as MaterialButton)
             }
             mbRegister.setOnClickListener {
                 if(state == REGISTER) {
+                    showLoadingModal()
                     val role = Roles.valueOf(
                         spinnerRoles.selectedItem.toString().uppercase()
                     )

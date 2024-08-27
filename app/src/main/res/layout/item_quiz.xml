@@ -8,13 +8,16 @@
         android:layout_height="wrap_content"
         android:backgroundTint="@color/design_default_color_secondary"
         android:layout_margin="@dimen/xxs"
+        app:strokeColor="@android:color/transparent"
         app:cardCornerRadius="@dimen/xxs"
         android:elevation="@dimen/xs">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:baselineAligned="false">
 
             <LinearLayout
                 android:id="@+id/llQuiz"
@@ -77,9 +80,10 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/llActions"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" >
+                android:orientation="vertical">
 
                 <ImageView
                     android:id="@+id/ivCopy"
@@ -96,6 +100,38 @@
                     android:layout_margin="@dimen/s"
                     android:src="@drawable/ic_delete"
                     android:contentDescription="@string/icon_desc"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llDetails"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:visibility="gone" >
+
+                <TextView
+                    android:id="@+id/tvTimeTaken"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="10"
+                    android:textColor="@color/white"
+                    android:drawablePadding="@dimen/xxxxs"
+                    app:drawableEndCompat="@drawable/ic_timer" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/mbScore"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/xxs"
+                    android:padding="@dimen/xxxs"
+                    android:minWidth="@dimen/zero"
+                    android:minHeight="@dimen/zero"
+                    android:textColor="@color/grey"
+                    android:textSize="@dimen/tiny_text_size"
+                    app:cornerRadius="@dimen/xxs"
+                    app:elevation="@dimen/xs"
+                    app:backgroundTint="@color/white" />
 
             </LinearLayout>
 

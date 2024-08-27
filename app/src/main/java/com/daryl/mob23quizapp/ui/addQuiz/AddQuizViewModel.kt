@@ -16,12 +16,12 @@ import com.daryl.mob23quizapp.data.repositories.UserRepo
 import com.daryl.mob23quizapp.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class AddQuizViewModel @Inject constructor(
-    private val userRepo: UserRepo,
     private val quizRepo: QuizRepo,
     private val storageService: StorageService,
     private val resourceProvider: ResourceProvider
@@ -30,6 +30,7 @@ class AddQuizViewModel @Inject constructor(
     fun add(quiz: Quiz) {
         viewModelScope.launch(Dispatchers.IO) {
             globalErrorHandler {
+                delay(500)
                 val error = performValidation(quiz)
                 if(error != null) throw Exception(error)
                 val data = quiz.copy(questions = questions)

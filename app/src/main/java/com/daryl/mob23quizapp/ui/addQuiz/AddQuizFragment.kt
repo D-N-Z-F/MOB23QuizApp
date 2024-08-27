@@ -31,6 +31,7 @@ class AddQuizFragment : BaseFragment<FragmentAddQuizBinding>() {
                 resultLauncher.launch(arrayOf("text/comma-separated-values"))
             }
             mbAdd.setOnClickListener {
+                showLoadingModal()
                 viewModel.add(
                     Quiz(
                         name = etName.text.toString(),
