@@ -31,7 +31,7 @@
                     android:id="@+id/tvID"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="QUIZ ID: 12345678"
+                    android:text="@string/placeholder"
                     android:textStyle="italic"
                     android:textSize="@dimen/tiny_text_size" />
 
@@ -39,7 +39,7 @@
                     android:id="@+id/tvName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="QUIZ EXAMPLE NAME"
+                    android:text="@string/placeholder"
                     android:textStyle="bold"
                     android:textSize="@dimen/extra_large_text_size"/>
 
@@ -53,7 +53,7 @@
                         android:id="@+id/tvCategory"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Science"
+                        android:text="@string/placeholder"
                         android:textColor="@color/white"/>
 
                     <TextView
@@ -61,7 +61,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="@dimen/s"
-                        android:text="20"
+                        android:text="@string/placeholder"
                         android:textColor="@color/white"
                         android:drawablePadding="@dimen/xxxxs"
                         app:drawableEndCompat="@drawable/ic_questions" />
@@ -70,7 +70,7 @@
                         android:id="@+id/tvTimeLimit"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="10"
+                        android:text="@string/placeholder"
                         android:textColor="@color/white"
                         android:drawablePadding="@dimen/xxxxs"
                         app:drawableEndCompat="@drawable/ic_timer" />
@@ -114,7 +114,7 @@
                     android:id="@+id/tvTimeTaken"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="10"
+                    android:text="@string/placeholder"
                     android:textColor="@color/white"
                     android:drawablePadding="@dimen/xxxxs"
                     app:drawableEndCompat="@drawable/ic_timer" />

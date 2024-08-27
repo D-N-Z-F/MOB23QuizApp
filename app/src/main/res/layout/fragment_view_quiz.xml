@@ -23,7 +23,7 @@
                 android:id="@+id/tvID"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="QUIZ ID: 12345678"
+                android:text="@string/placeholder"
                 android:textAlignment="center"
                 android:textStyle="italic"
                 android:textSize="@dimen/extra_large_text_size" />
@@ -32,7 +32,7 @@
                 android:id="@+id/tvName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="QUIZ EXAMPLE NAME"
+                android:text="@string/placeholder"
                 android:textAlignment="center"
                 android:textStyle="bold"
                 android:textSize="@dimen/giant_text_size"/>
@@ -48,7 +48,7 @@
                     android:id="@+id/tvCategory"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Science"
+                    android:text="@string/placeholder"
                     android:textSize="@dimen/extra_huge_text_size" />
 
                 <TextView
@@ -56,7 +56,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/s"
-                    android:text="20"
+                    android:text="@string/placeholder"
                     android:drawablePadding="@dimen/xxxxs"
                     app:drawableEndCompat="@drawable/ic_questions_big"
                     android:textSize="@dimen/extra_huge_text_size"/>
@@ -65,7 +65,7 @@
                     android:id="@+id/tvTimeLimit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="10"
+                    android:text="@string/placeholder"
                     android:drawablePadding="@dimen/xxxxs"
                     app:drawableEndCompat="@drawable/ic_timer_big"
                     android:textSize="@dimen/extra_huge_text_size" />
@@ -91,7 +91,7 @@
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/mbSettings"
-                    android:layout_width="0dp"
+                    android:layout_width="@dimen/zero"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/s"
                     android:layout_weight="1"
@@ -100,7 +100,7 @@
                     android:elevation="@dimen/xs"
                     android:backgroundTint="@color/blue"
                     app:iconGravity="textStart"
-                    app:iconPadding="0dp"/>
+                    app:iconPadding="@dimen/zero"/>
 
             </LinearLayout>
 
@@ -109,7 +109,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvQuestions"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="@dimen/zero"
             android:layout_weight="2"
             android:padding="@dimen/xxs"
             android:visibility="visible"/>
@@ -117,7 +117,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvParticipants"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="@dimen/zero"
             android:layout_weight="2"
             android:padding="@dimen/xxs"
             android:visibility="gone"/>

@@ -23,7 +23,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/xxxs"
-                android:text="QUESTION EXAMPLE TITLE"
+                android:text="@string/placeholder"
                 android:textStyle="italic"
                 android:textSize="@dimen/extra_large_text_size" />
 
@@ -41,17 +41,17 @@
 
                     <androidx.appcompat.widget.AppCompatRadioButton
                         android:id="@+id/rb1"
-                        android:layout_width="0dp"
+                        android:layout_width="@dimen/zero"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Option 1" />
+                        android:text="@string/placeholder" />
 
                     <androidx.appcompat.widget.AppCompatRadioButton
                         android:id="@+id/rb2"
-                        android:layout_width="0dp"
+                        android:layout_width="@dimen/zero"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Option 2" />
+                        android:text="@string/placeholder" />
 
                 </LinearLayout>
 
@@ -62,17 +62,17 @@
 
                     <androidx.appcompat.widget.AppCompatRadioButton
                         android:id="@+id/rb3"
-                        android:layout_width="0dp"
+                        android:layout_width="@dimen/zero"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Option 3" />
+                        android:text="@string/placeholder" />
 
                     <androidx.appcompat.widget.AppCompatRadioButton
                         android:id="@+id/rb4"
-                        android:layout_width="0dp"
+                        android:layout_width="@dimen/zero"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Option 4" />
+                        android:text="@string/placeholder" />
 
                 </LinearLayout>
 
@@ -85,7 +85,7 @@
                 android:layout_marginTop="@dimen/xxs"
                 android:textAlignment="textEnd"
                 android:textStyle="italic|bold"
-                android:text="EXAMPLE ANSWER" />
+                android:text="@string/placeholder" />
 
         </LinearLayout>
 

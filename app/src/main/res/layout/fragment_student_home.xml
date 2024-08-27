@@ -82,14 +82,14 @@
                        android:elevation="@dimen/xs"
                        android:backgroundTint="@color/design_default_color_secondary"
                        app:iconGravity="textStart"
-                       app:iconPadding="0dp" />
+                       app:iconPadding="@dimen/zero" />
 
                    <TextView
                        android:id="@+id/tvName"
                        android:layout_width="wrap_content"
                        android:layout_height="wrap_content"
                        android:layout_marginStart="@dimen/xs"
-                       android:text="QUIZ EXAMPLE NAME"
+                       android:text="@string/placeholder"
                        android:textSize="@dimen/small_text_size" />
 
                    <TextView
@@ -98,7 +98,7 @@
                        android:layout_height="wrap_content"
                        android:layout_marginStart="@dimen/xs"
                        android:layout_marginEnd="@dimen/xxxxs"
-                       android:text="Time Left: 10"
+                       android:text="@string/placeholder"
                        android:textSize="@dimen/huge_text_size"
                        android:textStyle="italic"/>
 

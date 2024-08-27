@@ -29,7 +29,7 @@
                     android:id="@+id/tvEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="STUDENT EXAMPLE EMAIL"
+                    android:text="@string/placeholder"
                     android:textStyle="italic"
                     android:textSize="@dimen/tiny_text_size" />
 
@@ -37,7 +37,7 @@
                     android:id="@+id/tvUsername"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="STUDENT EXAMPLE NAME"
+                    android:text="@string/placeholder"
                     android:textStyle="bold"
                     android:textSize="@dimen/extra_large_text_size"/>
 
@@ -55,7 +55,7 @@
                     android:id="@+id/tvTimeTaken"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="10"
+                    android:text="@dimen/zero"
                     android:textColor="@color/white"
                     android:drawablePadding="@dimen/xxxxs"
                     app:drawableEndCompat="@drawable/ic_timer" />
