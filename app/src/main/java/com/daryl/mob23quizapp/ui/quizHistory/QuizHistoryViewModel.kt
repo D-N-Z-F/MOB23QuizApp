@@ -11,6 +11,5 @@ import javax.inject.Inject
 class QuizHistoryViewModel @Inject constructor(
     private val quizRepo: QuizRepo
 ): BaseViewModel() {
-    fun getStudentQuizHistory(): Flow<List<Quiz>> =
-        quizRepo.getStudentQuizHistory()
+    fun getStudentQuizHistory(): Flow<List<Quiz>> = quizRepo.getStudentQuizHistory()
 }

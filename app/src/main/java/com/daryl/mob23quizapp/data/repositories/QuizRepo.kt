@@ -1,5 +1,7 @@
 package com.daryl.mob23quizapp.data.repositories
 
+import com.daryl.mob23quizapp.core.Constants.NON_EXISTENT_USER
+import com.daryl.mob23quizapp.core.Constants.QUIZ_COLLECTION_PATH
 import com.daryl.mob23quizapp.core.services.AuthService
 import com.daryl.mob23quizapp.core.utils.Utils.debugLog
 import com.daryl.mob23quizapp.data.models.Quiz
@@ -14,16 +16,18 @@ import kotlinx.coroutines.tasks.await
 class QuizRepo(
     private val authService: AuthService
 ) {
-    private fun getUid(): String = authService.getUid() ?: throw Exception("User doesn't exist.")
-    private fun getCurrentUser(): FirebaseUser = authService.getCurrentUser() ?: throw Exception("User doesn't exist.")
+    private fun getUid(): String = authService.getUid() ?: throw Exception(NON_EXISTENT_USER)
+    private fun getCurrentUser(): FirebaseUser =
+        authService.getCurrentUser() ?: throw Exception(NON_EXISTENT_USER)
     private fun getCollection(): CollectionReference =
-        Firebase.firestore.collection("quizzes")
+        Firebase.firestore.collection(QUIZ_COLLECTION_PATH)
     fun getTeacherQuizzes() = callbackFlow<List<Quiz>> {
         val listener = getCollection().addSnapshotListener { value, error ->
             if(error != null) throw error
             val quizzes = mutableListOf<Quiz>()
             value?.documents?.map { snapshot ->
                 snapshot.data?.let { map ->
+                    debugLog()(map)
                     val quiz = Quiz.fromMap(map)
                     if(quiz.teacherId == getUid()) quizzes.add(quiz.copy(id = snapshot.id))
                 }

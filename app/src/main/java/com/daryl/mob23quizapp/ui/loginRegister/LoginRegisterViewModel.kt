@@ -2,8 +2,16 @@ package com.daryl.mob23quizapp.ui.loginRegister
 
 import androidx.lifecycle.viewModelScope
 import com.daryl.mob23quizapp.R
+import com.daryl.mob23quizapp.core.Constants.EMAIL_ERROR_MESSAGE
+import com.daryl.mob23quizapp.core.Constants.EMAIL_REGEX
 import com.daryl.mob23quizapp.core.Constants.LOGIN
+import com.daryl.mob23quizapp.core.Constants.NON_EXISTENT_USER
+import com.daryl.mob23quizapp.core.Constants.PASSWORD_ERROR_MESSAGE
+import com.daryl.mob23quizapp.core.Constants.PASSWORD_REGEX
 import com.daryl.mob23quizapp.core.Constants.REGISTER
+import com.daryl.mob23quizapp.core.Constants.REGISTRATION_FAILED
+import com.daryl.mob23quizapp.core.Constants.USERNAME_ERROR_MESSAGE
+import com.daryl.mob23quizapp.core.Constants.USERNAME_REGEX
 import com.daryl.mob23quizapp.core.services.AuthService
 import com.daryl.mob23quizapp.core.utils.ResourceProvider
 import com.daryl.mob23quizapp.core.utils.Utils.capitalize
@@ -25,14 +33,17 @@ class LoginRegisterViewModel @Inject constructor(
     fun login(email: String, password: String) {
         viewModelScope.launch(Dispatchers.IO) {
             globalErrorHandler {
-                authService.login(email, password) ?: throw Exception("User doesn't exist.")
-                val user = userRepo.getUserById() ?: throw Exception("User doesn't exist.")
-                _signIn.emit(
-                    Pair(
-                        resourceProvider.getString(R.string.success_message, LOGIN.capitalize()),
-                        user.role
+                authService.login(email, password) ?: throw Exception(NON_EXISTENT_USER)
+                userRepo.getUserById()?.let {
+                    _signIn.emit(
+                        Pair(
+                            resourceProvider.getString(
+                                R.string.success_message, LOGIN.capitalize()
+                            ),
+                            it.role
+                        )
                     )
-                )
+                } ?: throw Exception(NON_EXISTENT_USER)
             }
         }
     }
@@ -42,33 +53,24 @@ class LoginRegisterViewModel @Inject constructor(
                 val error = performValidation(user, password, password2)
                 if(error != null) throw Exception(error)
                 val isRegistered = authService.register(user.email, password)
-                if(!isRegistered) throw Exception("Registration failed, please retry later.")
+                if(!isRegistered) throw Exception(REGISTRATION_FAILED)
                 userRepo.createUser(user)
                 _signIn.emit(
                     Pair(
-                        resourceProvider.getString(R.string.success_message, REGISTER.capitalize()),
+                        resourceProvider.getString(
+                            R.string.success_message, REGISTER.capitalize()
+                        ),
                         user.role
                     )
                 )
             }
         }
     }
-    private fun performValidation(user: User, password:String, password2: String) =
-        Validator.validate(
-            Validator(
-                user.username,
-                "[a-zA-Z ]{2,20}",
-                "Username can only contain alphabets with a length of 2 to 20."
-            ),
-            Validator(
-                user.email,
-                "[a-zA-Z0-9]+@[a-zA-Z0-9]+.[a-zA-Z0-9]+",
-                "Please enter a valid email. (e.g. johndoe123@gmail.com)"
-            ),
-            Validator(
-                password + password2,
-                "[a-zA-Z0-9#$%]{8,20}",
-                "Password must have a length of 8 to 20, only (#$%) special characters are allowed."
-            )
+    private fun performValidation(
+        user: User, password:String, password2: String
+    ) = Validator.validate(
+            Validator(user.username, USERNAME_REGEX, USERNAME_ERROR_MESSAGE),
+            Validator(user.email, EMAIL_REGEX, EMAIL_ERROR_MESSAGE),
+            Validator(password + password2, PASSWORD_REGEX, PASSWORD_ERROR_MESSAGE)
         )
 }

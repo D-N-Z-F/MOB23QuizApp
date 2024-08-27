@@ -2,19 +2,13 @@ package com.daryl.mob23quizapp.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import android.widget.RadioButton
-import androidx.core.view.children
-import androidx.core.view.forEachIndexed
 import androidx.core.view.isInvisible
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.daryl.mob23quizapp.core.Constants.HOLDER_TYPE_1
-import com.daryl.mob23quizapp.core.utils.Utils.debugLog
 import com.daryl.mob23quizapp.data.models.Question
-import com.daryl.mob23quizapp.data.models.Quiz
 import com.daryl.mob23quizapp.databinding.ItemQuestionBinding
-import com.daryl.mob23quizapp.databinding.ItemQuizBinding
 
 class QuestionAdapter(
     private var questions: List<Question>,
@@ -39,7 +33,8 @@ class QuestionAdapter(
         override fun bind(question: Question, position: Int) {
             super.bind(question, position)
             binding.run {
-                setOf(rb1, rb2, rb3, rb4).forEachIndexed { index, view ->
+                val buttons = setOf(rb1, rb2, rb3, rb4)
+                buttons.forEachIndexed { index, view ->
                     view.isEnabled = false
                     view.text = question.options[index]
                 }

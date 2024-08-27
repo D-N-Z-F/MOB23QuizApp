@@ -4,8 +4,11 @@ import android.content.res.ColorStateList
 import android.view.View
 import androidx.fragment.app.viewModels
 import com.daryl.mob23quizapp.R
+import com.daryl.mob23quizapp.core.Constants.BLACK
+import com.daryl.mob23quizapp.core.Constants.BLUE
 import com.daryl.mob23quizapp.core.Constants.LOGIN
 import com.daryl.mob23quizapp.core.Constants.REGISTER
+import com.daryl.mob23quizapp.core.Constants.WHITE
 import com.daryl.mob23quizapp.core.utils.ResourceProvider
 import com.daryl.mob23quizapp.data.models.Roles
 import com.daryl.mob23quizapp.data.models.User
@@ -24,9 +27,9 @@ class LoginRegisterFragment : BaseFragment<FragmentLoginRegisterBinding>() {
         super.onBindView(view)
         colorList = ResourceProvider(requireContext()).run {
             mapOf(
-                "Blue" to getColorList(R.color.blue),
-                "White" to getColorList(R.color.white),
-                "Black" to getColorList(R.color.black)
+                BLUE to getColorList(R.color.blue),
+                WHITE to getColorList(R.color.white),
+                BLACK to getColorList(R.color.black)
             )
         }
         binding?.run {
@@ -52,31 +55,33 @@ class LoginRegisterFragment : BaseFragment<FragmentLoginRegisterBinding>() {
         }
     }
     private fun toggleState(clickedButton: MaterialButton) {
+        // Toggles between login and register state.
         state = if(state == LOGIN) REGISTER else LOGIN
         resetInputs()
         changeButtonAppearance(clickedButton)
     }
     private fun resetInputs() {
+        // Resets all inputs on state toggle.
         binding?.run {
             val inputBoxes = setOf(etUsername, etEmail, etPassword, etPassword2)
             inputBoxes.forEach {
                 it.setText("")
-                if(it.id == etUsername.id || it.id == etPassword2.id) {
-                    it.visibility = setVisibility(state == LOGIN)
-                }
+                if(it.id == etUsername.id || it.id == etPassword2.id)
+                    it.visibility = invisible(state == LOGIN)
             }
             spinnerRoles.setSelection(0)
-            spinnerParent.visibility = setVisibility(state == LOGIN)
+            spinnerParent.visibility = invisible(state == LOGIN)
         }
     }
     private fun changeButtonAppearance(clickedButton: MaterialButton) {
+        // Switches the button color to appear more interactive on state toggle.
         binding?.run {
             val buttons = setOf(mbLogin, mbRegister)
             buttons.forEach { button ->
                 val isClicked = button.id == clickedButton.id
                 colorList?.let { list ->
-                    val backgroundColor = if(isClicked) "Blue" else "White"
-                    val textColor = if(isClicked) "White" else "Black"
+                    val backgroundColor = if(isClicked) BLUE else WHITE
+                    val textColor = if(isClicked) WHITE else BLACK
                     button.backgroundTintList = list[backgroundColor]
                     button.setTextColor(list[textColor])
                 }

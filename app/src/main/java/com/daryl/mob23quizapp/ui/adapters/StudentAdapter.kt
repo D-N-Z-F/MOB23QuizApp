@@ -8,8 +8,6 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.daryl.mob23quizapp.R
 import com.daryl.mob23quizapp.core.Constants.HOLDER_TYPE_1
 import com.daryl.mob23quizapp.core.utils.ResourceProvider
-import com.daryl.mob23quizapp.core.utils.Utils.debugLog
-import com.daryl.mob23quizapp.data.models.Participant
 import com.daryl.mob23quizapp.data.models.Quiz
 import com.daryl.mob23quizapp.data.models.User
 import com.daryl.mob23quizapp.databinding.ItemStudentBinding
@@ -40,14 +38,12 @@ class StudentAdapter(
         override fun bind(student: User) {
             super.bind(student)
             binding.run {
-                quiz?.let {
-                    val participant = it.participants.find { each ->
-                        each.studentEmail == student.email
-                    }
+                quiz?.let { quiz ->
+                    val participant = quiz.participants.find { it.studentEmail == student.email }
                     if(participant != null) {
                         tvTimeTaken.text = participant.timeTaken.toString()
                         mbScore.text = resourceProvider?.getString(
-                            R.string.score, participant.score, it.questions.size
+                            R.string.score, participant.score, quiz.questions.size
                         )
                         llDetails.visibility = View.VISIBLE
                     }
@@ -66,17 +62,17 @@ class StudentAdapter(
         }
     }
     fun setStudents(students: List<User>) {
-        quiz?.let {
+        // If teacher is viewing quiz participants, filter for students who participated in said quiz.
+        this.students = if(resourceProvider != null) {
             val newData = mutableListOf<User>()
-            it.participants.forEach { participant ->
+            quiz!!.participants.forEach {
                 students.forEach { user ->
-                    debugLog()("$user |||| $participant")
-                    if(user.email == participant.studentEmail) newData.add(user)
+                    if(user.email == it.studentEmail) newData.add(user)
                 }
             }
-            this.students = newData
-            notifyDataSetChanged()
-        }
+            newData
+        } else students
+        notifyDataSetChanged()
     }
     fun setQuiz(quiz: Quiz) { this.quiz = quiz }
 }

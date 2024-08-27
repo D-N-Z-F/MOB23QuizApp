@@ -4,6 +4,7 @@ import androidx.lifecycle.viewModelScope
 import com.daryl.mob23quizapp.R
 import com.daryl.mob23quizapp.core.Constants.DELETE
 import com.daryl.mob23quizapp.core.utils.ResourceProvider
+import com.daryl.mob23quizapp.core.utils.Utils.capitalize
 import com.daryl.mob23quizapp.data.models.Quiz
 import com.daryl.mob23quizapp.data.repositories.QuizRepo
 import com.daryl.mob23quizapp.ui.base.BaseViewModel
@@ -23,9 +24,10 @@ class TeacherDashboardViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             globalErrorHandler {
                 quizRepo.deleteQuiz(id)
-            }?.let {
                 _submit.emit(
-                    resourceProvider.getString(R.string.success_message, DELETE)
+                    resourceProvider.getString(
+                        R.string.success_message, DELETE.capitalize()
+                    )
                 )
             }
         }

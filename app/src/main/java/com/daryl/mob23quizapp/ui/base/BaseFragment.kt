@@ -11,33 +11,28 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.daryl.mob23quizapp.R
 import com.daryl.mob23quizapp.core.Constants.ADD
 import com.daryl.mob23quizapp.core.Constants.ERROR
 import com.daryl.mob23quizapp.core.Constants.INFO
+import com.daryl.mob23quizapp.core.Constants.LOAD_DELAY_TIMING
 import com.daryl.mob23quizapp.core.Constants.SUCCESS
 import com.daryl.mob23quizapp.core.services.ModalService
 import com.daryl.mob23quizapp.core.utils.Utils.capitalize
-import com.daryl.mob23quizapp.core.utils.Utils.debugLog
 import com.daryl.mob23quizapp.core.utils.Utils.popUpOptions
 import com.daryl.mob23quizapp.data.models.Roles.TEACHER
-import com.daryl.mob23quizapp.data.models.Roles.STUDENT
 import com.daryl.mob23quizapp.ui.MainActivity
-import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 abstract class BaseFragment<T: ViewDataBinding>: Fragment() {
     protected abstract val viewModel: BaseViewModel
     protected var binding: T? = null
     protected abstract fun getLayoutResource(): Int
+    protected lateinit var modalService: ModalService
     private lateinit var loadingModal: AlertDialog
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View = inflater.inflate(getLayoutResource(), container, false)
@@ -48,16 +43,17 @@ abstract class BaseFragment<T: ViewDataBinding>: Fragment() {
     }
     protected open fun onBindView(view: View) {
         binding = DataBindingUtil.bind(view)
-        loadingModal = ModalService(requireContext()).createLoadingModal()
+        modalService = ModalService(requireContext())
+        loadingModal = modalService.createLoadingModal()
     }
     protected open fun onBindData(view: View) {
         viewModel.run {
             lifecycleScope.launch {
                 signIn.collect {
+                    delay(LOAD_DELAY_TIMING)
+                    dismissLoadingModal()
                     val (string, role) = it
                     showSnackBar(view, string, INFO)
-                    delay(500)
-                    dismissLoadingModal()
                     (requireActivity() as? MainActivity)?.setupNavViewMenu(role)
                     val destination = when(role) {
                         TEACHER -> R.id.teacherDashboardFragment
@@ -70,22 +66,22 @@ abstract class BaseFragment<T: ViewDataBinding>: Fragment() {
             }
             lifecycleScope.launch {
                 error.collect {
-                    showSnackBar(view, it, ERROR)
-                    delay(500)
+                    delay(LOAD_DELAY_TIMING)
                     dismissLoadingModal()
+                    showSnackBar(view, it, ERROR)
                 }
             }
             lifecycleScope.launch {
                 submit.collect {
-                    showSnackBar(requireView(), it, SUCCESS)
-                    delay(500)
+                    delay(LOAD_DELAY_TIMING)
                     dismissLoadingModal()
+                    showSnackBar(requireView(), it, SUCCESS)
                     if(it.contains(ADD.capitalize())) findNavController().popBackStack()
                 }
             }
         }
     }
-    protected fun setVisibility(condition: Boolean): Int = if(condition) View.GONE else View.VISIBLE
+    protected fun invisible(condition: Boolean): Int = if(condition) View.GONE else View.VISIBLE
 
     private fun showToast(message: String) {
         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
@@ -102,6 +98,7 @@ abstract class BaseFragment<T: ViewDataBinding>: Fragment() {
             .setBackgroundTint(ContextCompat.getColor(requireContext(), backgroundTint))
             .show()
     }
+    // Displays and hides the loading indicator whenever called.
     protected fun showLoadingModal() { if(!loadingModal.isShowing) loadingModal.show() }
     protected fun dismissLoadingModal() { if(loadingModal.isShowing) loadingModal.dismiss() }
 }

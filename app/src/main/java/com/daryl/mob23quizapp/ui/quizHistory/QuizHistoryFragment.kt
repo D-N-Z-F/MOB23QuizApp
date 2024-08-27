@@ -30,8 +30,8 @@ class QuizHistoryFragment : BaseFragment<FragmentQuizHistoryBinding>() {
         lifecycleScope.launch {
             viewModel.getStudentQuizHistory().collect {
                 adapter.setQuizzes(it)
-                binding?.rvQuizzes?.visibility = setVisibility(it.isEmpty())
-                binding?.tvEmpty?.visibility = setVisibility(it.isNotEmpty())
+                binding?.rvQuizzes?.visibility = invisible(it.isEmpty())
+                binding?.tvEmpty?.visibility = invisible(it.isNotEmpty())
             }
         }
     }

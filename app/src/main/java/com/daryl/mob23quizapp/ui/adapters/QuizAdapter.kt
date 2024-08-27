@@ -3,17 +3,14 @@ package com.daryl.mob23quizapp.ui.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isInvisible
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.daryl.mob23quizapp.R
 import com.daryl.mob23quizapp.core.Constants.HOLDER_TYPE_1
 import com.daryl.mob23quizapp.core.services.AuthService
 import com.daryl.mob23quizapp.core.utils.ResourceProvider
-import com.daryl.mob23quizapp.core.utils.Utils.debugLog
 import com.daryl.mob23quizapp.data.models.Quiz
 import com.daryl.mob23quizapp.databinding.ItemQuizBinding
-import javax.inject.Inject
 
 class QuizAdapter(
     private var quizzes: List<Quiz>,

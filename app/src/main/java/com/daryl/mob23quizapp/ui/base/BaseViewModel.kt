@@ -6,13 +6,11 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 
 abstract class BaseViewModel: ViewModel() {
-    protected val _finish = MutableSharedFlow<String>()
-    val finish: SharedFlow<String> = _finish
     protected val _signIn = MutableSharedFlow<Pair<String, Roles>>()
     val signIn: SharedFlow<Pair<String, Roles>> = _signIn
     protected val _submit = MutableSharedFlow<String>()
     val submit: SharedFlow<String> = _submit
-    protected val _error = MutableSharedFlow<String>()
+    private val _error = MutableSharedFlow<String>()
     val error: SharedFlow<String> = _error
 
     suspend fun <T> globalErrorHandler(func: suspend () -> T?): T? =

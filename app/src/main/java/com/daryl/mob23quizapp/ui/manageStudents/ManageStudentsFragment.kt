@@ -26,8 +26,8 @@ class ManageStudentsFragment : BaseFragment<FragmentManageStudentsBinding>() {
         lifecycleScope.launch {
             viewModel.getAllStudents().collect {
                 adapter.setStudents(it)
-                binding?.rvStudents?.visibility = setVisibility(it.isEmpty())
-                binding?.tvEmpty?.visibility = setVisibility(it.isNotEmpty())
+                binding?.rvStudents?.visibility = invisible(it.isEmpty())
+                binding?.tvEmpty?.visibility = invisible(it.isNotEmpty())
             }
         }
     }

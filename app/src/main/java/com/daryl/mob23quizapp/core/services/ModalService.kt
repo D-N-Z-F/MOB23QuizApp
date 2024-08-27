@@ -6,23 +6,20 @@ import androidx.appcompat.app.AlertDialog
 import androidx.databinding.ViewDataBinding
 import com.daryl.mob23quizapp.R
 import com.daryl.mob23quizapp.core.utils.ResourceProvider
+import com.daryl.mob23quizapp.data.models.Results
 import com.daryl.mob23quizapp.databinding.LayoutConfirmEndQuizModalBinding
 import com.daryl.mob23quizapp.databinding.LayoutEditQuizModalBinding
 import com.daryl.mob23quizapp.databinding.LayoutLoadingModalBinding
 import com.daryl.mob23quizapp.databinding.LayoutQuizResultModalBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import javax.inject.Inject
 
 class ModalService(
     private val context: Context
 ) {
     fun showQuizResultModal(
-        resourceProvider: ResourceProvider,
-        maxScore: Int,
-        score: Int,
-        timeTaken: Int,
-        onClick: () -> Unit
+        resourceProvider: ResourceProvider, results: Results, onClick: () -> Unit
     ) {
+        val (maxScore, score, timeTaken) = results
         val view = LayoutQuizResultModalBinding.inflate(LayoutInflater.from(context))
         val dialog = dialogBuilder(view).setCancelable(false).create()
         view.run {

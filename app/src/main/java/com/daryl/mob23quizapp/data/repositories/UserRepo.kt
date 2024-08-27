@@ -1,5 +1,7 @@
 package com.daryl.mob23quizapp.data.repositories
 
+import com.daryl.mob23quizapp.core.Constants.NON_EXISTENT_USER
+import com.daryl.mob23quizapp.core.Constants.USER_COLLECTION_PATH
 import com.daryl.mob23quizapp.core.services.AuthService
 import com.daryl.mob23quizapp.data.models.Roles
 import com.daryl.mob23quizapp.data.models.User
@@ -13,9 +15,9 @@ import kotlinx.coroutines.tasks.await
 class UserRepo(
     private val authService: AuthService
 ) {
-    private fun getUid(): String = authService.getUid() ?: throw Exception("User doesn't exist.")
+    private fun getUid(): String = authService.getUid() ?: throw Exception(NON_EXISTENT_USER)
     private fun getCollection(): CollectionReference =
-        Firebase.firestore.collection("users")
+        Firebase.firestore.collection(USER_COLLECTION_PATH)
     fun getAllStudents() = callbackFlow<List<User>> {
         val listener = getCollection().addSnapshotListener { value, error ->
             if(error != null) throw error

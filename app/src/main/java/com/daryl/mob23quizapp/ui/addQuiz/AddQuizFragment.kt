@@ -8,6 +8,7 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
 import com.daryl.mob23quizapp.R
+import com.daryl.mob23quizapp.core.Constants.DEFAULT_TIME_PER_QUESTION
 import com.daryl.mob23quizapp.data.models.Quiz
 import com.daryl.mob23quizapp.databinding.FragmentAddQuizBinding
 import com.daryl.mob23quizapp.ui.base.BaseFragment
@@ -28,29 +29,31 @@ class AddQuizFragment : BaseFragment<FragmentAddQuizBinding>() {
         super.onBindView(view)
         binding?.run {
             mbUpload.setOnClickListener {
-                resultLauncher.launch(arrayOf("text/comma-separated-values"))
+                // Only allow selection of files of type specified in below array.
+                val fileTypes = arrayOf("text/comma-separated-values")
+                resultLauncher.launch(fileTypes)
             }
             mbAdd.setOnClickListener {
                 showLoadingModal()
+                val timePerQuestion =
+                    etTimeLimit.text.toString().toIntOrNull() ?: DEFAULT_TIME_PER_QUESTION
                 viewModel.add(
                     Quiz(
                         name = etName.text.toString(),
                         category = etCategory.text.toString(),
                         questions = emptyList(),
-                        timePerQuestion = etTimeLimit.text.toString().toIntOrNull() ?: 10
+                        timePerQuestion = timePerQuestion
                     )
                 )
             }
         }
-    }
-    override fun onBindData(view: View) {
-        super.onBindData(view)
     }
     private fun setupResultLauncher(): ActivityResultLauncher<Array<String>> =
         registerForActivityResult(
             ActivityResultContracts.OpenDocument()
         ) { uri ->
             uri?.let {
+                // Filter out the questions for the quiz and display name of file selected.
                 viewModel.getQuestionsFromCSV(it)
                 binding?.etUpload?.hint = viewModel.getFileName(it)
             }

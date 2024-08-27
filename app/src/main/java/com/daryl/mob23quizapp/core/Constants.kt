@@ -1,9 +1,10 @@
 package com.daryl.mob23quizapp.core
 
-import com.daryl.mob23quizapp.R
-
 object Constants {
-    const val COPY_ID = "COPY_ID"
+    const val CLIP_ID = "CLIP_ID"
+
+    const val USER_COLLECTION_PATH = "users"
+    const val QUIZ_COLLECTION_PATH = "quizzes"
 
     const val INFO = "INFO"
     const val SUCCESS = "SUCCESS"
@@ -22,5 +23,30 @@ object Constants {
     const val PARTICIPANTS = "PARTICIPANTS"
     const val QUESTIONS = "QUESTIONS"
 
-    val COLOR_LIST = setOf("Red", "Blue", "Green", "Yellow", "Purple", "Grey", "White", "Black")
+    const val UNEXPECTED_ERROR = "Unexpected error occurred."
+    const val NON_EXISTENT_USER = "User doesn't exist."
+    const val REGISTRATION_FAILED = "Registration failed, please retry later."
+    const val NON_EXISTENT_QUIZ = "Quiz doesn't exist."
+    const val EMPTY_QUIZ_ID = "Please enter a valid Quiz ID."
+    const val NON_EXISTENT_CSV = "Please upload a valid CSV file."
+
+    const val DEFAULT_TIME_PER_QUESTION = 10
+    const val COUNT_DOWN_INTERVAL = 1000L
+    const val LOAD_DELAY_TIMING = 1500L
+    const val SPLASH_SCREEN_DURATION = 2500L
+
+    const val BLUE = "BLUE"
+    const val WHITE = "WHITE"
+    const val BLACK = "BLACK"
+
+    const val USERNAME_REGEX = "[a-zA-Z ]{2,20}"
+    const val USERNAME_ERROR_MESSAGE = "Username can only contain alphabets with a length of 2 to 20."
+    const val EMAIL_REGEX = "[a-zA-Z0-9]+@[a-zA-Z0-9]+.[a-zA-Z0-9]+"
+    const val EMAIL_ERROR_MESSAGE = "Please enter a valid email. (e.g. johndoe123@gmail.com)"
+    const val PASSWORD_REGEX = "[a-zA-Z0-9#$%]{8,20}"
+    const val PASSWORD_ERROR_MESSAGE = "Password must have a length of 8 to 20, only (#$%) special characters are allowed."
+    const val QUIZ_NAME_REGEX = "[a-zA-Z ]{2,20}"
+    const val QUIZ_NAME_ERROR_MESSAGE = "Name can only contain alphabets with a length of 2 to 20."
+    const val QUIZ_CATEGORY_REGEX = "[a-zA-Z ]{2,20}"
+    const val QUIZ_CATEGORY_ERROR_MESSAGE = "Category can only contain alphabets with a length of 2 to 20."
 }

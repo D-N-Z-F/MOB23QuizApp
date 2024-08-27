@@ -84,7 +84,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="5"
-                    android:text="@string/see"
+                    android:text="@string/switch_view"
                     app:cornerRadius="@dimen/xxxs"
                     android:elevation="@dimen/xs"
                     android:backgroundTint="@color/blue"/>

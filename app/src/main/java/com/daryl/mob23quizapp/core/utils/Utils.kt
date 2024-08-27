@@ -3,10 +3,8 @@ package com.daryl.mob23quizapp.core.utils
 import android.util.Log
 import androidx.annotation.IdRes
 import androidx.navigation.NavOptions
-import com.daryl.mob23quizapp.data.models.Roles
 
 object Utils {
-    // Temporary for debugging
     fun debugLog(): (Any) -> Unit = { Log.d("debugging", it.toString()) }
     fun String.capitalize() =
         this.substring(0, 1).uppercase() + this.substring(1).lowercase()

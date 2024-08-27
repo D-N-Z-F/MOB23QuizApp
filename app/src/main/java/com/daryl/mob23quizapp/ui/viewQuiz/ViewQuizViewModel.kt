@@ -4,6 +4,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.daryl.mob23quizapp.R
 import com.daryl.mob23quizapp.core.Constants.EDIT
+import com.daryl.mob23quizapp.core.Constants.NON_EXISTENT_QUIZ
 import com.daryl.mob23quizapp.core.utils.ResourceProvider
 import com.daryl.mob23quizapp.core.utils.Utils.capitalize
 import com.daryl.mob23quizapp.data.models.Quiz
@@ -28,15 +29,14 @@ class ViewQuizViewModel @Inject constructor(
 ): BaseViewModel() {
     private val _quiz = MutableSharedFlow<Quiz>()
     val quiz: SharedFlow<Quiz> = _quiz
-    init {
-        savedStateHandle.get<String>("quizId")?.let { getQuizById(it) }
-    }
+    init { savedStateHandle.get<String>("quizId")?.let { getQuizById(it) } }
     fun getAllStudents(): Flow<List<User>> = userRepo.getAllStudents()
     private fun getQuizById(id: String) {
         viewModelScope.launch(Dispatchers.IO) {
             globalErrorHandler {
-                val quiz = quizRepo.getQuizById(id) ?: throw Exception("Quiz doesn't exist.")
-                _quiz.emit(quiz)
+                quizRepo.getQuizById(id)?.let {
+                    _quiz.emit(it)
+                } ?: throw Exception(NON_EXISTENT_QUIZ)
             }
         }
     }
@@ -44,11 +44,14 @@ class ViewQuizViewModel @Inject constructor(
         viewModelScope.launch {
             globalErrorHandler {
                 quizRepo.updateQuiz(quiz)
-                getQuizById(quiz.id!!)
-            }?.let {
-                _submit.emit(
-                    resourceProvider.getString(R.string.success_message, EDIT.capitalize())
-                )
+                quiz.id?.let {
+                    getQuizById(it)
+                    _submit.emit(
+                        resourceProvider.getString(
+                            R.string.success_message, EDIT.capitalize()
+                        )
+                    )
+                } ?: throw Exception(NON_EXISTENT_QUIZ)
             }
         }
     }
