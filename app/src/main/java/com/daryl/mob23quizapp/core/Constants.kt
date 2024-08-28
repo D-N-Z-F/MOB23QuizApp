@@ -1,6 +1,7 @@
 package com.daryl.mob23quizapp.core
 
 object Constants {
+    const val ARG_NAME = "quizId"
     const val CLIP_ID = "CLIP_ID"
 
     const val USER_COLLECTION_PATH = "users"

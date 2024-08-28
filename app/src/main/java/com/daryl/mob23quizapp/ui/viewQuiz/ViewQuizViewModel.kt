@@ -3,6 +3,7 @@ package com.daryl.mob23quizapp.ui.viewQuiz
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.daryl.mob23quizapp.R
+import com.daryl.mob23quizapp.core.Constants.ARG_NAME
 import com.daryl.mob23quizapp.core.Constants.EDIT
 import com.daryl.mob23quizapp.core.Constants.NON_EXISTENT_QUIZ
 import com.daryl.mob23quizapp.core.utils.ResourceProvider
@@ -29,7 +30,7 @@ class ViewQuizViewModel @Inject constructor(
 ): BaseViewModel() {
     private val _quiz = MutableSharedFlow<Quiz>()
     val quiz: SharedFlow<Quiz> = _quiz
-    init { savedStateHandle.get<String>("quizId")?.let { getQuizById(it) } }
+    init { savedStateHandle.get<String>(ARG_NAME)?.let { getQuizById(it) } }
     fun getAllStudents(): Flow<List<User>> = userRepo.getAllStudents()
     private fun getQuizById(id: String) {
         viewModelScope.launch(Dispatchers.IO) {
