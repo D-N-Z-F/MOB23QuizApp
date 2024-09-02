@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/xxl"
             android:text="@string/sign_in_header"
-            android:textStyle="italic|bold"
+            android:textStyle="bold"
             android:textSize="@dimen/giant_text_size"/>
 
         <ImageView

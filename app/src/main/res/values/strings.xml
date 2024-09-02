@@ -11,7 +11,7 @@
     <string name="password2_insert">Confirm Password</string>
     <string name="login">LOGIN</string>
     <string name="register">REGISTER</string>
-    <string name="sign_in_header">Sign In</string>
+    <string name="sign_in_header">SIGN IN</string>
     <string name="success_message">%1$s successful.</string>
     <string name="time_left">Time Left: %1$d</string>
     <string name="time_taken">Time Taken: %1$d seconds</string>
